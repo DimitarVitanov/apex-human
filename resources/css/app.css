@@ -1,0 +1,217 @@
+@import 'tailwindcss';
+
+@theme {
+    --font-display: 'Bebas Neue', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+
+    --color-black: #000000;
+    --color-black-warm: #0A0908;
+    --color-dark-grey: #16140F;
+    --color-mid-grey: #221F18;
+    --color-gold-shine: #FFE9A0;
+    --color-gold-light: #F5D17A;
+    --color-gold: #C9973A;
+    --color-gold-deep: #8B6914;
+    --color-off-white: #E8DCC8;
+    --color-text-body: #D4C9B0;
+    --color-warm-grey: #9C8E78;
+
+    --ease-apex: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+    html.lenis, html.lenis body {
+        height: auto;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    body {
+        background-color: var(--color-black);
+        color: var(--color-text-body);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        cursor: none;
+    }
+
+    ::selection {
+        background-color: var(--color-gold);
+        color: var(--color-black);
+    }
+
+    @media (hover: none) {
+        body {
+            cursor: auto;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
+
+@layer components {
+    .prose-apex {
+        color: var(--color-text-body);
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .prose-apex h2 {
+        font-family: var(--font-display);
+        color: var(--color-gold-light);
+        font-size: 1.5rem;
+        letter-spacing: 0.04em;
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .prose-apex h3 {
+        font-family: var(--font-display);
+        color: var(--color-off-white);
+        font-size: 1.25rem;
+        letter-spacing: 0.04em;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .prose-apex p {
+        margin-bottom: 1.25rem;
+    }
+
+    .prose-apex blockquote {
+        border-left: 2px solid var(--color-gold);
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+        font-family: var(--font-serif);
+        font-style: italic;
+        color: var(--color-gold-light);
+        font-size: 1.125rem;
+    }
+
+    .prose-apex ul, .prose-apex ol {
+        margin: 1.5rem 0;
+        padding-left: 1.5rem;
+    }
+
+    .prose-apex li {
+        margin-bottom: 0.5rem;
+    }
+
+    .prose-apex ul li::marker {
+        color: var(--color-gold);
+    }
+
+    .prose-apex strong {
+        color: var(--color-off-white);
+        font-weight: 600;
+    }
+
+    .prose-apex em {
+        color: var(--color-warm-grey);
+        font-style: italic;
+    }
+
+    .prose-apex a {
+        color: var(--color-gold);
+        text-decoration: underline;
+        text-decoration-color: var(--color-gold-deep);
+        transition: text-decoration-color 0.2s;
+    }
+
+    .prose-apex a:hover {
+        text-decoration-color: var(--color-gold);
+    }
+}
+
+/* Scroll reveal animations — outside @layer so they always ship */
+.reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.reveal-fade {
+    opacity: 0;
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-fade.revealed {
+    opacity: 1;
+}
+
+.parallax-hero {
+    will-change: transform;
+}
+
+.img-divider {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-divider::before,
+.img-divider::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 80px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.img-divider::before {
+    top: 0;
+    background: linear-gradient(to bottom, #000000, transparent);
+}
+
+.img-divider::after {
+    bottom: 0;
+    background: linear-gradient(to top, #000000, transparent);
+}
