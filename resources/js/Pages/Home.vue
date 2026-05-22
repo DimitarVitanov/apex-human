@@ -29,7 +29,7 @@
         </section>
 
         <!-- Manifesto -->
-        <section v-if="s('manifesto')" class="scroll-section py-24 lg:py-32 px-6">
+        <section v-if="s('manifesto')" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-5xl mx-auto">
                 <p v-if="s('manifesto').eyebrow" class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ s('manifesto').eyebrow }}</p>
                 <h2 v-if="s('manifesto').headline" class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] leading-tight mb-8">{{ s('manifesto').headline }}</h2>
@@ -38,7 +38,7 @@
         </section>
 
         <!-- Stats -->
-        <section v-if="s('stats')" class="scroll-section py-16 bg-black-warm/50 border-y border-gold-deep/10">
+        <section v-if="s('stats')" class="scroll-section py-10 md:py-16 bg-black-warm/50 border-y border-gold-deep/10">
             <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div v-for="stat in parseMeta(s('stats'), 'stats')" :key="stat.value" class="text-center">
                     <p class="font-display text-gold text-4xl lg:text-5xl">{{ stat.value }}</p>
@@ -48,12 +48,12 @@
         </section>
 
         <!-- Image Divider: Marble -->
-        <div class="parallax-divider img-divider h-[30vh] md:h-[40vh]">
+        <div class="parallax-divider img-divider h-[15vh] md:h-[30vh] lg:h-[40vh]">
             <img src="/images/transition-marble.webp" alt="" class="w-full h-full object-cover" loading="lazy">
         </div>
 
         <!-- The Method Preview (6 Pillars) -->
-        <section v-if="s('pillars')" class="scroll-section py-24 lg:py-32 px-6">
+        <section v-if="s('pillars')" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-5xl mx-auto">
                 <div class="flex items-end justify-between mb-12">
                     <div>
@@ -89,7 +89,7 @@
         </section>
 
         <!-- Quote / Promise -->
-        <section v-if="s('promise')" class="scroll-section py-20 px-6 bg-black-warm/50 border-y border-gold-deep/10">
+        <section v-if="s('promise')" class="scroll-section py-12 md:py-20 px-6 bg-black-warm/50 border-y border-gold-deep/10">
             <div class="max-w-3xl mx-auto text-center">
                 <blockquote class="font-serif text-gold-light text-2xl md:text-3xl tracking-[0.02em] leading-snug italic">
                     &ldquo;{{ s('promise').quote }}&rdquo;
@@ -98,7 +98,7 @@
         </section>
 
         <!-- Social Proof / Client Results -->
-        <section v-if="s('social_proof')" class="scroll-section py-24 lg:py-32 px-6">
+        <section v-if="s('social_proof')" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-5xl mx-auto">
                 <div class="mb-16">
                     <p v-if="s('social_proof').eyebrow" class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ s('social_proof').eyebrow }}</p>
@@ -119,12 +119,12 @@
         </section>
 
         <!-- Image Divider: Metal -->
-        <div class="parallax-divider img-divider h-[30vh] md:h-[40vh]">
+        <div class="parallax-divider img-divider h-[15vh] md:h-[30vh] lg:h-[40vh]">
             <img src="/images/transition-metal.webp" alt="" class="w-full h-full object-cover" loading="lazy">
         </div>
 
         <!-- For Whom — with image -->
-        <section v-if="s('for_whom')" class="scroll-section py-24 lg:py-32 px-6">
+        <section v-if="s('for_whom')" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                 <div>
                     <p v-if="s('for_whom').eyebrow" class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ s('for_whom').eyebrow }}</p>
@@ -142,7 +142,7 @@
         </section>
 
         <!-- Standards -->
-        <section v-if="s('standards')" class="scroll-section py-24 lg:py-32 px-6 bg-black-warm/30">
+        <section v-if="s('standards')" class="scroll-section py-14 md:py-24 lg:py-32 px-6 bg-black-warm/30">
             <div class="max-w-6xl mx-auto">
                 <p v-if="s('standards').eyebrow" class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ s('standards').eyebrow }}</p>
                 <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] leading-tight mb-12">{{ s('standards').headline }}</h2>
@@ -172,7 +172,7 @@
         </section>
 
         <!-- Latest from The Journal -->
-        <section v-if="latestPosts.length" class="scroll-section py-24 lg:py-32 px-6">
+        <section v-if="latestPosts.length" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-5xl mx-auto">
                 <div class="flex items-end justify-between mb-12">
                     <div>
@@ -216,12 +216,12 @@
         </section>
 
         <!-- Image Divider: Stakes Thread -->
-        <div class="parallax-divider img-divider h-[25vh] md:h-[35vh]">
+        <div class="parallax-divider img-divider h-[12vh] md:h-[25vh] lg:h-[35vh]">
             <img src="/images/stakes-thread.webp" alt="" class="w-full h-full object-cover" loading="lazy">
         </div>
 
         <!-- Daily Apex Feed -->
-        <section v-if="latestDailyApex.length" class="scroll-section py-24 lg:py-32 px-6">
+        <section v-if="latestDailyApex.length" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
                 <div class="lg:col-span-1">
                     <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">Daily Practice</p>
@@ -251,7 +251,7 @@
         </section>
 
         <!-- The Anti-Testimonial -->
-        <section class="scroll-section py-32 lg:py-44 px-6">
+        <section class="scroll-section py-16 md:py-32 lg:py-44 px-6">
             <div class="max-w-3xl mx-auto text-center">
                 <p class="font-serif italic text-gold text-2xl md:text-3xl lg:text-4xl leading-relaxed tracking-wide">"We do not publish names, photos, or testimonials. The work is private. The work is the proof."</p>
                 <p class="font-serif italic text-gold text-base md:text-lg tracking-wide mt-8">— Apex Human</p>
@@ -259,7 +259,7 @@
         </section>
 
         <!-- Final CTA with background image -->
-        <section v-if="s('cta')" class="scroll-section relative py-32 lg:py-40 px-6 overflow-hidden">
+        <section v-if="s('cta')" class="scroll-section relative py-16 md:py-32 lg:py-40 px-6 overflow-hidden">
             <div class="absolute inset-0">
                 <img src="/images/final-horizon.webp" alt="" class="w-full h-full object-cover opacity-15" loading="lazy">
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40"></div>

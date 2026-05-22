@@ -1,7 +1,7 @@
 <template>
     <footer class="border-t border-gold-deep/30 bg-black">
-        <div class="mx-auto max-w-[1440px] px-6 lg:px-12 py-16 lg:py-24">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8">
+        <div class="mx-auto max-w-[1440px] px-6 lg:px-12 py-10 md:py-16 lg:py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-8">
                 <div>
                     <p class="font-display text-gold text-[22px] tracking-[0.18em]">APEX HUMAN&#8482;</p>
                     <p class="mt-3 font-serif italic text-off-white text-base leading-relaxed">

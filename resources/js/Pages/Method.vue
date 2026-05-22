@@ -10,7 +10,7 @@
         </section>
 
         <!-- Outcomes -->
-        <section v-if="s('outcomes')" class="scroll-section py-24 lg:py-32 px-6">
+        <section v-if="s('outcomes')" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-5xl mx-auto">
                 <p v-if="s('outcomes').eyebrow" class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ s('outcomes').eyebrow }}</p>
                 <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] mb-10">{{ s('outcomes').headline }}</h2>
@@ -24,7 +24,7 @@
         </section>
 
         <!-- Pillars -->
-        <section v-if="s('pillars')" class="scroll-section py-24 lg:py-32 px-6 bg-black-warm/30">
+        <section v-if="s('pillars')" class="scroll-section py-14 md:py-24 lg:py-32 px-6 bg-black-warm/30">
             <div class="max-w-5xl mx-auto">
                 <p v-if="s('pillars').eyebrow" class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ s('pillars').eyebrow }}</p>
                 <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] mb-12">{{ s('pillars').headline }}</h2>
@@ -40,7 +40,7 @@
         </section>
 
         <!-- Timeline -->
-        <section v-if="s('timeline')" class="scroll-section py-24 lg:py-32 px-6">
+        <section v-if="s('timeline')" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-5xl mx-auto">
                 <p v-if="s('timeline').eyebrow" class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ s('timeline').eyebrow }}</p>
                 <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] mb-12">{{ s('timeline').headline }}</h2>
@@ -59,7 +59,7 @@
         </section>
 
         <!-- How it works -->
-        <section v-if="s('how_it_works')" class="scroll-section py-24 lg:py-32 px-6 bg-black-warm/30">
+        <section v-if="s('how_it_works')" class="scroll-section py-14 md:py-24 lg:py-32 px-6 bg-black-warm/30">
             <div class="max-w-5xl mx-auto">
                 <p v-if="s('how_it_works').eyebrow" class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ s('how_it_works').eyebrow }}</p>
                 <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] mb-8">{{ s('how_it_works').headline }}</h2>
@@ -73,7 +73,7 @@
         </section>
 
         <!-- Standards -->
-        <section v-if="s('standards')" class="scroll-section py-24 lg:py-32 px-6">
+        <section v-if="s('standards')" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-6xl mx-auto">
                 <p v-if="s('standards').eyebrow" class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ s('standards').eyebrow }}</p>
                 <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] leading-tight mb-12">{{ s('standards').headline }}</h2>
@@ -103,7 +103,7 @@
         </section>
 
         <!-- CTA -->
-        <section v-if="s('cta')" class="scroll-section py-24 lg:py-32 px-6 text-center">
+        <section v-if="s('cta')" class="scroll-section py-14 md:py-24 lg:py-32 px-6 text-center">
             <Link v-if="s('cta').cta_text" :href="s('cta').cta_url || '/apply'" class="inline-block px-8 py-3.5 bg-gold text-black text-xs tracking-[0.3em] uppercase font-sans font-semibold hover:bg-gold-light active:bg-gold-deep transition-colors duration-400">
                 {{ s('cta').cta_text }}
             </Link>

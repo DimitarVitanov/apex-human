@@ -1,7 +1,7 @@
 <template>
     <AppLayout :title="page.meta_title">
         <!-- Hero -->
-        <section v-if="s('hero')" class="pt-32 pb-16 px-6">
+        <section v-if="s('hero')" class="pt-24 pb-10 md:pt-32 md:pb-16 px-6">
             <div class="max-w-5xl mx-auto text-center">
                 <h1 class="font-display text-gold-light text-4xl md:text-5xl tracking-[0.06em] leading-tight">{{ s('hero').headline }}</h1>
             </div>
@@ -15,7 +15,7 @@
         </section>
 
         <!-- Contact Form -->
-        <section v-else class="scroll-section py-16 px-6">
+        <section v-else class="scroll-section py-10 md:py-16 px-6">
             <form @submit.prevent="submit" class="max-w-5xl mx-auto space-y-6">
                 <div>
                     <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">Name *</label>
@@ -43,7 +43,7 @@
         </section>
 
         <!-- Contact Info -->
-        <section class="scroll-section py-16 px-6 border-t border-gold-deep/10">
+        <section class="scroll-section py-10 md:py-16 px-6 border-t border-gold-deep/10">
             <div class="max-w-5xl mx-auto text-center space-y-4">
                 <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-semibold">Or reach us directly</p>
                 <p class="text-off-white text-sm">coach@apexhuman.co</p>

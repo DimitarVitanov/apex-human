@@ -1,6 +1,6 @@
 <template>
     <AppLayout :title="post.meta_title || post.title">
-        <article class="pt-32 pb-24 px-6">
+        <article class="pt-24 pb-14 md:pt-32 md:pb-24 px-6">
             <header class="max-w-5xl mx-auto text-center mb-16">
                 <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold">{{ post.category }}</p>
                 <h1 class="font-display text-gold-light text-3xl md:text-5xl tracking-[0.06em] leading-tight mt-4">{{ post.title }}</h1>
@@ -16,7 +16,7 @@
         </article>
 
         <!-- Related Posts -->
-        <section v-if="related.length" class="scroll-section py-16 px-6 border-t border-gold-deep/10">
+        <section v-if="related.length" class="scroll-section py-10 md:py-16 px-6 border-t border-gold-deep/10">
             <div class="max-w-5xl mx-auto">
                 <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold mb-8 text-center">More from The Journal</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">

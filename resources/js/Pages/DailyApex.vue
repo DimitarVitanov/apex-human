@@ -1,7 +1,7 @@
 <template>
     <AppLayout :title="page.meta_title">
         <!-- Hero -->
-        <section v-if="s('hero')" class="pt-32 pb-16 px-6">
+        <section v-if="s('hero')" class="pt-24 pb-10 md:pt-32 md:pb-16 px-6">
             <div class="max-w-5xl mx-auto text-center">
                 <h1 class="font-display text-gold-light text-4xl md:text-5xl tracking-[0.06em] leading-tight">{{ s('hero').headline }}</h1>
                 <p v-if="s('hero').subheadline" class="text-text-body text-base mt-4">{{ s('hero').subheadline }}</p>
@@ -9,7 +9,7 @@
         </section>
 
         <!-- Posts -->
-        <section class="scroll-section py-16 px-6">
+        <section class="scroll-section py-10 md:py-16 px-6">
             <div class="max-w-5xl mx-auto space-y-8">
                 <article v-for="post in posts.data" :key="post.id" class="border-l-2 border-gold pl-6 py-2">
                     <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold">{{ post.category || 'Daily Apex' }}</p>
