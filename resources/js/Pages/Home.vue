@@ -8,6 +8,7 @@
                     ref="heroImg"
                     :src="s('hero').image"
                     :alt="s('hero').image_alt || ''"
+                    fetchpriority="high"
                     class="parallax-hero w-full h-[120%] object-cover opacity-20"
                 >
                 <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black"></div>
