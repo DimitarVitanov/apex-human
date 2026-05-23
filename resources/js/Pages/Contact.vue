@@ -47,7 +47,6 @@
             <div class="max-w-5xl mx-auto text-center space-y-4">
                 <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-semibold">Or reach us directly</p>
                 <p class="text-off-white text-sm">coach@apexhuman.co</p>
-                <p class="text-off-white text-sm">@apexhumansystem</p>
             </div>
         </section>
     </AppLayout>

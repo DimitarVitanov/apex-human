@@ -57,14 +57,7 @@
                         >
                             coach@apexhuman.co
                         </a>
-                        <a
-                            href="https://instagram.com/apexhumansystem"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="text-text-body text-sm tracking-wide hover:text-gold-light transition-colors duration-200 cursor-none"
-                        >
-                            @apexhumansystem
-                        </a>
+                      
                         <Link
                             href="/apply"
                             class="text-gold text-sm tracking-wide hover:text-gold-light transition-colors duration-200 cursor-none"
