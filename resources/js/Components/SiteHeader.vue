@@ -64,16 +64,24 @@
                 v-if="mobileOpen"
                 class="lg:hidden fixed inset-0 top-16 bg-black/95 backdrop-blur-md z-30 flex flex-col items-center justify-center gap-8"
             >
-                <Link
-                    v-for="item in allItems"
-                    :key="item.url"
-                    :href="item.url"
-                    class="text-text-body text-lg tracking-[0.15em] uppercase font-sans font-medium hover:text-gold-light transition-colors duration-200"
-                    :class="item.is_cta ? 'text-gold mt-4' : ''"
-                    @click="mobileOpen = false"
-                >
-                    {{ item.label }}
-                </Link>
+                <template v-for="item in allItems" :key="item.url">
+                    <Link
+                        v-if="!item.is_cta"
+                        :href="item.url"
+                        class="text-text-body text-lg tracking-[0.15em] uppercase font-sans font-medium hover:text-gold-light transition-colors duration-200"
+                        @click="mobileOpen = false"
+                    >
+                        {{ item.label }}
+                    </Link>
+                    <Link
+                        v-else
+                        :href="item.url"
+                        class="px-8 py-3 bg-gold text-black text-sm tracking-[0.3em] uppercase font-sans font-semibold hover:bg-gold-light active:bg-gold-deep transition-colors duration-400"
+                        @click="mobileOpen = false"
+                    >
+                        {{ item.label }}
+                    </Link>
+                </template>
             </div>
         </Transition>
     </header>
