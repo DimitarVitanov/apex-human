@@ -7,7 +7,7 @@
                     <p class="mt-3 font-serif italic text-off-white text-base leading-relaxed">
                         The Apex isn't a body. It's a life.
                     </p>
-                    <p class="text-gold-deep text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mt-8 mb-4">Follow Us</p>
+                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mt-8 mb-4">Follow Us</p>
                     <div class="flex items-center gap-4">
                         <a
                             href="mailto:coach@apexhuman.co"
@@ -35,7 +35,7 @@
                 </div>
 
                 <div>
-                    <p class="text-gold-deep text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-5">Navigate</p>
+                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-5">Navigate</p>
                     <div class="flex flex-col gap-3">
                         <Link
                             v-for="item in footerNav"
@@ -49,7 +49,7 @@
                 </div>
 
                 <div>
-                    <p class="text-gold-deep text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-5">Connect</p>
+                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-5">Connect</p>
                     <div class="flex flex-col gap-3">
                         <a
                             href="mailto:coach@apexhuman.co"
@@ -76,7 +76,7 @@
             </div>
 
             <div class="mt-8 pt-8 border-t border-gold-deep/20">
-                <p class="text-gold-deep text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-4">Not ready to apply?</p>
+                <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-4">Not ready to apply?</p>
                 <p class="text-warm-grey text-sm mb-4">Get the Apex Letter. One email when it matters. No noise.</p>
                 <form @submit.prevent="subscribeNewsletter" class="flex gap-0 max-w-md border-b border-gold-deep focus-within:border-gold transition-colors duration-400">
                     <input
