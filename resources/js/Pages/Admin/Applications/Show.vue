@@ -20,15 +20,22 @@
             </div>
 
             <!-- Booking Link (shown when accepted) -->
-            <div v-if="application.booking_token" class="bg-gold/5 border border-gold/20 rounded p-6">
-                <p class="text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-2">Booking Link</p>
-                <div class="flex items-center gap-3">
-                    <input :value="bookingUrl" readonly class="flex-1 bg-transparent border border-gold-deep/30 text-off-white text-xs px-3 py-2 rounded font-mono">
-                    <button @click="copyLink" class="px-4 py-2 bg-gold text-black text-[9px] tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-colors rounded">
-                        {{ copied ? 'Copied!' : 'Copy' }}
-                    </button>
+            <div v-if="application.booking_token" class="bg-gold/5 border border-gold/20 rounded p-6 space-y-4">
+                <div>
+                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-2">Booking Link</p>
+                    <div class="flex items-center gap-3">
+                        <input :value="bookingUrl" readonly class="flex-1 bg-transparent border border-gold-deep/30 text-off-white text-xs px-3 py-2 rounded font-mono">
+                        <button @click="copyLink" class="px-4 py-2 bg-gold text-black text-[9px] tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-colors rounded">
+                            {{ copied ? 'Copied!' : 'Copy' }}
+                        </button>
+                    </div>
+                    <p class="text-warm-grey text-xs mt-2">Send this link to the applicant so they can book a discovery call via Google Meet.</p>
                 </div>
-                <p class="text-warm-grey text-xs mt-2">Send this link to the applicant so they can book a discovery call.</p>
+                <div>
+                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-2">Google Meet Link</p>
+                    <a :href="meetLink" target="_blank" class="text-gold text-xs hover:text-gold-light transition-colors underline">{{ meetLink }}</a>
+                    <p class="text-warm-grey text-xs mt-1">This link will be sent to the applicant when they book their call.</p>
+                </div>
             </div>
 
             <form @submit.prevent="save" class="bg-black-warm border border-gold-deep/20 rounded p-6 space-y-4">
@@ -53,7 +60,7 @@
 import { ref, computed } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-const props = defineProps({ application: Object });
+const props = defineProps({ application: Object, meetLink: String });
 const form = useForm({ status: props.application.status, admin_notes: props.application.admin_notes || '' });
 function save() { form.put(`/admin/applications/${props.application.id}`); }
 

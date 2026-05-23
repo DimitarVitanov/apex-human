@@ -27,6 +27,7 @@ class ApplicationController extends Controller
     {
         return Inertia::render('Admin/Applications/Show', [
             'application' => $application,
+            'meetLink' => config('services.google.meet_link', 'https://meet.google.com'),
         ]);
     }
 
