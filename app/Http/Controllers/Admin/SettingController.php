@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
@@ -28,6 +29,8 @@ class SettingController extends Controller
         foreach ($request->settings as $setting) {
             SiteSetting::set($setting['key'], $setting['value']);
         }
+
+        Cache::forget('site_settings');
 
         return back()->with('success', 'Settings updated.');
     }

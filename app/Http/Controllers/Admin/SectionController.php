@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class SectionController extends Controller
 {
@@ -34,6 +35,8 @@ class SectionController extends Controller
         }
 
         $section->update($data);
+
+        Cache::forget('page_' . $section->page->slug);
 
         return back()->with('success', 'Section updated.');
     }

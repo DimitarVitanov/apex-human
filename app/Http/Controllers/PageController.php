@@ -7,25 +7,26 @@ use App\Models\NavigationItem;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\SiteSetting;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 
 class PageController extends Controller
 {
     public function home()
     {
-        $page = Page::where('slug', 'home')->with('visibleSections')->firstOrFail();
+        $page = Cache::remember('page_home', 3600, fn () => Page::where('slug', 'home')->with('visibleSections')->firstOrFail());
 
         return Inertia::render('Home', [
             'page' => $page,
             'sections' => $page->visibleSections->keyBy('key'),
-            'latestPosts' => Post::published()->take(3)->get(),
-            'latestDailyApex' => DailyApex::published()->take(5)->get(),
+            'latestPosts' => Cache::remember('latest_posts', 3600, fn () => Post::published()->take(3)->get()),
+            'latestDailyApex' => Cache::remember('latest_daily_apex', 3600, fn () => DailyApex::published()->take(5)->get()),
         ]);
     }
 
     public function about()
     {
-        $page = Page::where('slug', 'about')->with('visibleSections')->firstOrFail();
+        $page = Cache::remember('page_about', 3600, fn () => Page::where('slug', 'about')->with('visibleSections')->firstOrFail());
 
         return Inertia::render('About', [
             'page' => $page,
@@ -35,7 +36,7 @@ class PageController extends Controller
 
     public function method()
     {
-        $page = Page::where('slug', 'method')->with('visibleSections')->firstOrFail();
+        $page = Cache::remember('page_method', 3600, fn () => Page::where('slug', 'method')->with('visibleSections')->firstOrFail());
 
         return Inertia::render('Method', [
             'page' => $page,
@@ -45,7 +46,7 @@ class PageController extends Controller
 
     public function apply()
     {
-        $page = Page::where('slug', 'apply')->with('visibleSections')->firstOrFail();
+        $page = Cache::remember('page_apply', 3600, fn () => Page::where('slug', 'apply')->with('visibleSections')->firstOrFail());
 
         return Inertia::render('Apply', [
             'page' => $page,
@@ -90,7 +91,7 @@ class PageController extends Controller
 
     public function contact()
     {
-        $page = Page::where('slug', 'contact')->with('visibleSections')->firstOrFail();
+        $page = Cache::remember('page_contact', 3600, fn () => Page::where('slug', 'contact')->with('visibleSections')->firstOrFail());
 
         return Inertia::render('Contact', [
             'page' => $page,

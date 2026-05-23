@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\NavigationItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 
 class NavigationController extends Controller
@@ -30,6 +31,8 @@ class NavigationController extends Controller
 
         NavigationItem::create($data);
 
+        Cache::forget('nav_items');
+
         return back()->with('success', 'Navigation item added.');
     }
 
@@ -46,12 +49,16 @@ class NavigationController extends Controller
 
         $navigation->update($data);
 
+        Cache::forget('nav_items');
+
         return back()->with('success', 'Navigation item updated.');
     }
 
     public function destroy(NavigationItem $navigation)
     {
         $navigation->delete();
+
+        Cache::forget('nav_items');
 
         return back()->with('success', 'Navigation item deleted.');
     }

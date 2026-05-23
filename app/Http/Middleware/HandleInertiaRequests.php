@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\NavigationItem;
 use App\Models\SiteSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -46,11 +47,11 @@ class HandleInertiaRequests extends Middleware
                     'is_admin' => $request->user()->is_admin,
                 ] : null,
             ],
-            'navigation' => fn () => [
+            'navigation' => fn () => Cache::remember('nav_items', 3600, fn () => [
                 'header' => NavigationItem::forLocation('header')->get()->toArray(),
                 'footer' => NavigationItem::forLocation('footer')->get()->toArray(),
-            ],
-            'settings' => fn () => SiteSetting::all()->pluck('value', 'key')->toArray(),
+            ]),
+            'settings' => fn () => Cache::remember('site_settings', 3600, fn () => SiteSetting::all()->pluck('value', 'key')->toArray()),
             'flash' => fn () => [
                 'success' => $request->session()->get('success'),
                 'error' => $request->session()->get('error'),

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 
 class PageController extends Controller
@@ -33,6 +34,8 @@ class PageController extends Controller
         ]);
 
         $page->update($request->only('title', 'meta_title', 'meta_description', 'is_published'));
+
+        Cache::forget('page_' . $page->slug);
 
         return back()->with('success', 'Page updated.');
     }
