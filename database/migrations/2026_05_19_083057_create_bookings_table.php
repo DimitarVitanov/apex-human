@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('available_slot_id')->constrained()->onDelete('cascade');
             $table->date('date');
             $table->time('start_time');
-            $table->string('format')->default('zoom');
+            $table->string('format')->default('google_meet');
             $table->integer('duration_minutes')->default(30);
             $table->string('status')->default('confirmed');
             $table->timestamps();

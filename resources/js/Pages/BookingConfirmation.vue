@@ -18,7 +18,7 @@
                     </div>
                     <div class="flex justify-between border-b border-gold-deep/10 pb-3">
                         <p class="text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold">Format</p>
-                        <p class="text-off-white text-sm capitalize">{{ booking.format }} (link sent in calendar invite)</p>
+                        <p class="text-off-white text-sm">Google Meet (link sent via email)</p>
                     </div>
                     <div class="flex justify-between border-b border-gold-deep/10 pb-3">
                         <p class="text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold">Duration</p>

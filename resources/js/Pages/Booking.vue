@@ -8,7 +8,7 @@
                     <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">You Have Been Selected</p>
                     <h1 class="font-display text-gold-light text-3xl md:text-5xl tracking-[0.06em] leading-tight mb-4">The Discovery Call.</h1>
                     <p class="text-text-body text-sm leading-relaxed max-w-lg mx-auto">
-                        Thirty minutes. Zoom or Google Meet — your choice. We'll talk through your context, your goals, and whether the system is the right fit.
+                        Thirty minutes on Google Meet. We'll talk through your context, your goals, and whether the system is the right fit.
                     </p>
                 </div>
 
