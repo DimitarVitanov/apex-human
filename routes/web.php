@@ -61,6 +61,7 @@ Route::prefix('admin')->middleware(['auth', \App\Http\Middleware\AdminMiddleware
 
     Route::get('/settings', [Admin\SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [Admin\SettingController::class, 'update'])->name('settings.update');
+    Route::put('/settings/password', [Admin\SettingController::class, 'updatePassword'])->name('settings.password');
 
     Route::get('/navigation', [Admin\NavigationController::class, 'index'])->name('navigation.index');
     Route::post('/navigation', [Admin\NavigationController::class, 'store'])->name('navigation.store');
