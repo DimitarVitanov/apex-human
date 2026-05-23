@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingConfirmation;
 use App\Models\Application;
 use App\Models\AvailableSlot;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 use Carbon\Carbon;
 
@@ -92,6 +94,10 @@ class BookingController extends Controller
             'date' => $slot->date,
             'start_time' => $slot->start_time,
         ]);
+
+        $meetLink = config('services.google.meet_link', 'https://meet.google.com');
+        Mail::to($application->email)->send(new BookingConfirmation($booking, $application, $meetLink));
+        Mail::to(config('mail.from.address'))->send(new BookingConfirmation($booking, $application, $meetLink));
 
         if ($request->wantsJson()) {
             return response()->json(['success' => true, 'booking' => $booking]);

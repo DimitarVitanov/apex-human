@@ -16,6 +16,23 @@
                 <button type="submit" :disabled="form.processing" class="px-5 py-2 bg-gold text-black text-xs tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-colors disabled:opacity-50">Save Settings</button>
             </form>
 
+            <div class="bg-black-warm border border-gold-deep/20 rounded p-6 space-y-4">
+                <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold mb-2">Test Emails</p>
+                <p class="text-warm-grey text-xs mb-4">Send test emails to <span class="text-off-white">{{ fromAddress }}</span></p>
+                <div class="flex flex-wrap gap-3">
+                    <button
+                        v-for="emailType in emailTypes"
+                        :key="emailType.type"
+                        @click="sendTestEmail(emailType.type)"
+                        :disabled="testingEmail === emailType.type"
+                        class="px-4 py-2 border border-gold-deep/30 text-off-white text-xs tracking-[0.1em] uppercase font-semibold hover:border-gold hover:text-gold transition-colors disabled:opacity-50"
+                    >
+                        <span v-if="testingEmail === emailType.type">Sending...</span>
+                        <span v-else>{{ emailType.label }}</span>
+                    </button>
+                </div>
+            </div>
+
             <form @submit.prevent="changePassword" class="bg-black-warm border border-gold-deep/20 rounded p-6 space-y-4">
                 <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold mb-2">Change Password</p>
                 <div>
@@ -39,8 +56,8 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
-import { useForm } from '@inertiajs/vue3';
+import { reactive, ref } from 'vue';
+import { useForm, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 const props = defineProps({ settings: Object });
@@ -53,6 +70,25 @@ const form = useForm({});
 function save() {
     const settingsArray = Object.entries(formData).map(([key, value]) => ({ key, value }));
     form.transform(() => ({ settings: settingsArray })).put('/admin/settings');
+}
+
+const fromAddress = 'coach@apexhuman.co';
+const testingEmail = ref(null);
+
+const emailTypes = [
+    { type: 'application-confirmation', label: 'Application Confirmation' },
+    { type: 'contact-auto-reply', label: 'Contact Auto-Reply' },
+    { type: 'admin-new-application', label: 'Admin: New Application' },
+    { type: 'admin-new-contact', label: 'Admin: New Contact' },
+    { type: 'booking-confirmation', label: 'Booking Confirmation' },
+];
+
+function sendTestEmail(type) {
+    testingEmail.value = type;
+    router.post(`/admin/settings/test-email/${type}`, {}, {
+        preserveScroll: true,
+        onFinish: () => { testingEmail.value = null; },
+    });
 }
 
 const passwordForm = useForm({
