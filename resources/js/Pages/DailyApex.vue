@@ -1,5 +1,5 @@
 <template>
-    <AppLayout :title="page.meta_title">
+    <AppLayout :title="page.meta_title" :description="page.meta_description">
         <!-- Hero -->
         <section v-if="s('hero')" class="pt-24 pb-10 md:pt-32 md:pb-16 px-6">
             <div class="max-w-5xl mx-auto text-center">

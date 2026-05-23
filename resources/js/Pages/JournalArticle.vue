@@ -1,5 +1,5 @@
 <template>
-    <AppLayout :title="post.meta_title || post.title">
+    <AppLayout :title="post.meta_title || post.title" :description="post.meta_description || post.excerpt">
         <article class="pt-24 pb-14 md:pt-32 md:pb-24 px-6">
             <header class="max-w-5xl mx-auto text-center mb-16">
                 <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold">{{ post.category }}</p>

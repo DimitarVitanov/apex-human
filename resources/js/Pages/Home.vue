@@ -1,5 +1,5 @@
 <template>
-    <AppLayout :title="page.meta_title">
+    <AppLayout :title="page.meta_title" :description="page.meta_description">
         <!-- Hero with Parallax -->
         <section v-if="s('hero')" class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
             <div class="absolute inset-0">

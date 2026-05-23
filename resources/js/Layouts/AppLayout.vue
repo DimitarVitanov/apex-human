@@ -1,5 +1,7 @@
 <template>
-    <Head :title="title" />
+    <Head :title="title">
+        <meta v-if="description" name="description" :content="description">
+    </Head>
     <div class="min-h-screen bg-black">
         <CustomCursor />
         <SiteHeader />
@@ -18,5 +20,6 @@ import SiteFooter from '@/Components/SiteFooter.vue';
 
 defineProps({
     title: { type: String, default: 'Apex Human' },
+    description: { type: String, default: null },
 });
 </script>

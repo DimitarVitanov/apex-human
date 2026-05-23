@@ -1,5 +1,5 @@
 <template>
-    <AppLayout :title="page.meta_title">
+    <AppLayout :title="page.meta_title" :description="page.meta_description">
         <section class="min-h-screen flex items-center justify-center px-6">
             <div class="max-w-5xl mx-auto w-full">
 
