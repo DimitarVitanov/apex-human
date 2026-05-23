@@ -98,8 +98,13 @@
         </div>
 
         <div class="border-t border-gold-deep/20 py-6 px-6 lg:px-12">
-            <div class="mx-auto max-w-[1440px]">
-                <p class="text-warm-grey text-[10px] uppercase tracking-[0.2em] text-center">
+            <div class="mx-auto max-w-[1440px] text-center space-y-2">
+                <div class="flex items-center justify-center gap-2 text-warm-grey text-[10px] uppercase tracking-[0.2em]">
+                    <Link href="/privacy-policy" class="hover:text-gold-light transition-colors duration-200">Privacy Policy</Link>
+                    <span>&middot;</span>
+                    <Link href="/terms-of-service" class="hover:text-gold-light transition-colors duration-200">Terms of Service</Link>
+                </div>
+                <p class="text-warm-grey text-[10px] uppercase tracking-[0.2em]">
                     &copy; {{ currentYear }} APEX HUMAN&#8482; &middot; ALL RIGHTS RESERVED &middot; apexhuman.co
                 </p>
             </div>

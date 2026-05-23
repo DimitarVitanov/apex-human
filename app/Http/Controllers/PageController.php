@@ -97,4 +97,14 @@ class PageController extends Controller
             'sections' => $page->visibleSections->keyBy('key'),
         ]);
     }
+
+    public function privacyPolicy()
+    {
+        return Inertia::render('PrivacyPolicy');
+    }
+
+    public function termsOfService()
+    {
+        return Inertia::render('TermsOfService');
+    }
 }

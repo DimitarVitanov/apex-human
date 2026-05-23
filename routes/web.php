@@ -16,6 +16,8 @@ Route::get('/journal', [PageController::class, 'journal'])->name('journal');
 Route::get('/journal/{slug}', [PageController::class, 'journalShow'])->name('journal.show');
 Route::get('/daily-apex', [PageController::class, 'dailyApex'])->name('daily-apex');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/terms-of-service', [PageController::class, 'termsOfService'])->name('terms-of-service');
 
 // Form submissions
 Route::post('/apply', [FormController::class, 'submitApplication'])->name('apply.submit');
