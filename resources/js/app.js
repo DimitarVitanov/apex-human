@@ -7,7 +7,7 @@ import '../css/app.css';
 const appName = import.meta.env.VITE_APP_NAME || 'Apex Human';
 
 createInertiaApp({
-    title: (title) => title ? `${title} — Apex Human` : 'Apex Human — The Complete Fitness System',
+    title: (title) => title ? (title.includes('Apex Human') ? title : `${title} — Apex Human`) : 'Apex Human — The Complete Fitness System',
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.vue`,
