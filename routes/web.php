@@ -48,6 +48,8 @@ Route::prefix('admin')->middleware(['auth', \App\Http\Middleware\AdminMiddleware
     Route::resource('posts', Admin\PostController::class)->except(['show']);
     Route::resource('daily-apex', Admin\DailyApexController::class)->except(['show']);
 
+    Route::post('/media', [Admin\MediaController::class, 'store'])->name('media.store');
+
     Route::get('/applications', [Admin\ApplicationController::class, 'index'])->name('applications.index');
     Route::get('/applications/{application}', [Admin\ApplicationController::class, 'show'])->name('applications.show');
     Route::put('/applications/{application}', [Admin\ApplicationController::class, 'update'])->name('applications.update');
