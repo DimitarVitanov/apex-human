@@ -57,7 +57,7 @@ class AboutPageSeeder extends Seeder
                 'key' => 'promise',
                 'type' => 'content',
                 'quote' => "We don't promise outcomes. We promise the system, the standards, the confidentiality, and the full attention of your coach — and yours alone — for twelve months.",
-                'cta_text' => 'Apply for Coaching',
+                'cta_text' => 'Apply for Private Coaching',
                 'cta_url' => '/apply',
                 'sort_order' => 4,
             ],

@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\SiteSetting;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
 class ApexContentSeeder extends Seeder
@@ -60,26 +61,31 @@ class ApexContentSeeder extends Seeder
 
     private function seedNavigation(): void
     {
+        // Two header items point to /apply (the "Private Coaching" link and the
+        // "Apply" CTA), so we can't key on location+url. Rebuild the menus cleanly.
+        NavigationItem::whereIn('location', ['header', 'footer'])->delete();
+
         $items = [
             ['location' => 'header', 'label' => 'About', 'url' => '/about', 'sort_order' => 1],
-            ['location' => 'header', 'label' => 'The Method', 'url' => '/method', 'sort_order' => 2],
-            ['location' => 'header', 'label' => 'The Journal', 'url' => '/journal', 'sort_order' => 3],
-            ['location' => 'header', 'label' => 'Contact', 'url' => '/contact', 'sort_order' => 4],
-            ['location' => 'header', 'label' => 'Apply', 'url' => '/apply', 'sort_order' => 5, 'is_cta' => true],
-            ['location' => 'footer', 'label' => 'Home', 'url' => '/', 'sort_order' => 1],
-            ['location' => 'footer', 'label' => 'About', 'url' => '/about', 'sort_order' => 2],
-            ['location' => 'footer', 'label' => 'Our Services', 'url' => '/method', 'sort_order' => 3],
-            ['location' => 'footer', 'label' => 'The Journal', 'url' => '/journal', 'sort_order' => 4],
+            ['location' => 'header', 'label' => 'The Protocol', 'url' => '/method', 'sort_order' => 2],
+            ['location' => 'header', 'label' => 'Private Coaching', 'url' => '/apply', 'sort_order' => 3],
+            ['location' => 'header', 'label' => 'Journal', 'url' => '/journal', 'sort_order' => 4],
+            ['location' => 'header', 'label' => 'Daily Apex', 'url' => '/daily-apex', 'sort_order' => 5],
+            ['location' => 'header', 'label' => 'Apply', 'url' => '/apply', 'sort_order' => 6, 'is_cta' => true],
+            ['location' => 'footer', 'label' => 'About', 'url' => '/about', 'sort_order' => 1],
+            ['location' => 'footer', 'label' => 'The Protocol', 'url' => '/method', 'sort_order' => 2],
+            ['location' => 'footer', 'label' => 'Private Coaching', 'url' => '/apply', 'sort_order' => 3],
+            ['location' => 'footer', 'label' => 'Journal', 'url' => '/journal', 'sort_order' => 4],
             ['location' => 'footer', 'label' => 'Daily Apex', 'url' => '/daily-apex', 'sort_order' => 5],
             ['location' => 'footer', 'label' => 'Contact', 'url' => '/contact', 'sort_order' => 6],
         ];
 
         foreach ($items as $item) {
-            NavigationItem::updateOrCreate(
-                ['location' => $item['location'], 'url' => $item['url']],
-                $item
-            );
+            NavigationItem::create($item);
         }
+
+        // The shared nav is cached for an hour — drop it so changes show immediately.
+        Cache::forget('nav_items');
     }
 
     private function seedPages(): void

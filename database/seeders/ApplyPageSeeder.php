@@ -13,7 +13,7 @@ class ApplyPageSeeder extends Seeder
             ['slug' => 'apply'],
             [
                 'title' => 'Apply',
-                'meta_title' => 'Apex Human — Apply for Coaching',
+                'meta_title' => 'Apex Human — Apply for Private Coaching',
                 'meta_description' => 'We accept eight clients per quarter. If you are ready to commit twelve months, apply below.',
                 'is_published' => true,
                 'sort_order' => 4,

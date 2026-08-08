@@ -114,7 +114,7 @@ class MethodPageSeeder extends Seeder
             [
                 'key' => 'cta',
                 'type' => 'content',
-                'cta_text' => 'Apply for Coaching',
+                'cta_text' => 'Apply for Private Coaching',
                 'cta_url' => '/apply',
                 'sort_order' => 7,
             ],

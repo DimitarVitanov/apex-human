@@ -27,12 +27,15 @@ class HomePageSeeder extends Seeder
                 'type' => 'hero',
                 'eyebrow' => 'FOR THE MAN WHO REFUSES TO MAKE FITNESS A HOBBY',
                 'headline' => 'The body to match the life you already built',
-                'subheadline' => "Energy. Strength. Clarity. Longevity. Twelve months. One system. Built for men who don't have time to be a fitness project.",
+                'subheadline' => 'Private training, nutrition and performance coaching for men who have built successful lives—and now expect the same standard from their bodies.',
                 'quote' => "THE APEX ISN'T A BODY. IT'S A LIFE.",
-                'cta_text' => 'Apply for Coaching',
+                'cta_text' => 'Apply for Private Coaching',
                 'cta_url' => '/apply',
                 'image' => '/images/hero-atmospheric.webp',
                 'image_alt' => 'Gold leaf texture',
+                'metadata' => json_encode([
+                    'cta_note' => 'Limited private client intake. Applications are reviewed individually.',
+                ]),
                 'sort_order' => 1,
             ],
             [
@@ -140,7 +143,7 @@ class HomePageSeeder extends Seeder
                 'eyebrow' => '07 · THE OFFER',
                 'headline' => 'One coach. One system. Twelve months',
                 'quote' => "We don't promise outcomes. We promise the system, the standards, the confidentiality, and the full attention of your coach — and yours alone — for twelve months.",
-                'cta_text' => 'Apply for Coaching',
+                'cta_text' => 'Apply for Private Coaching',
                 'cta_url' => '/apply',
                 'metadata' => json_encode([
                     'stats' => [
@@ -156,7 +159,7 @@ class HomePageSeeder extends Seeder
                 'type' => 'content',
                 'eyebrow' => 'THE MANIFESTO',
                 'headline' => 'Fitness shouldn\'t run your life. It should fuel it',
-                'body' => "You didn't build what you have by accident. The career, the family, the momentum — all earned. But somewhere along the way, the body stopped keeping pace.\n\nNot because of laziness. Because of misplaced priorities, bad advice, and systems that were never designed for a man with an actual calendar.\n\nThe Apex Method exists for one reason: to give you back what used to come for free — the energy, the clarity, the physical edge — without asking you to become someone you're not.",
+                'body' => "You didn't build what you have by accident. The career, the family, the momentum — all earned. But somewhere along the way, the body stopped keeping pace.\n\nNot because of laziness. Because of misplaced priorities, bad advice, and systems that were never designed for a man with an actual calendar.\n\nThe Apex Method exists for one reason: to give you back what used to come for free — the energy, the clarity, the physical edge — without asking you to become someone you're not.\n\nThis is not online personal training. It is a private performance system engineered around your entire life — your calendar, your travel, your standards.",
                 'sort_order' => 12,
             ],
             [
@@ -177,6 +180,7 @@ class HomePageSeeder extends Seeder
                 'type' => 'pillars',
                 'eyebrow' => 'THE SIX PILLARS',
                 'headline' => 'One system. Six pillars. Built for life',
+                'subheadline' => 'The Apex Method integrates strength, movement, nutrition, recovery, lifestyle and health data into one system built around your life.',
                 'metadata' => json_encode([
                     'pillars' => [
                         ['numeral' => 'I', 'title' => 'Resistance Architecture', 'subtitle' => 'STRENGTH & STRUCTURE', 'body' => 'Compound movement patterns built around your schedule. Three to four sessions. Forty-five minutes. No ego lifting.'],
@@ -199,8 +203,8 @@ class HomePageSeeder extends Seeder
                 'key' => 'social_proof',
                 'type' => 'social_proof',
                 'eyebrow' => 'CLIENT RESULTS',
-                'headline' => 'What the system delivers',
-                'body' => 'We don\'t share names, photos, or stories without permission. We never will. Here\'s what our clients have chosen to share.',
+                'headline' => 'Private by Default. Proof by Permission.',
+                'body' => 'We don\'t publish client names, photos or personal stories without permission. What we can share is what clients tell us about the work.',
                 'metadata' => json_encode([
                     'testimonials' => [
                         ['name' => 'Client, 42 · CEO', 'quote' => 'I\'ve worked with trainers for fifteen years. This is the first time someone built a system around my calendar instead of asking me to build my calendar around a system.', 'result' => '-14kg body fat · bloodwork in top 5% for age'],
@@ -230,8 +234,11 @@ class HomePageSeeder extends Seeder
                 'type' => 'cta',
                 'headline' => "The rest of your life starts here",
                 'subheadline' => 'Eight spots per quarter. Application only. Twelve-month commitment.',
-                'cta_text' => 'Apply for Coaching',
+                'cta_text' => 'Apply for Private Coaching',
                 'cta_url' => '/apply',
+                'metadata' => json_encode([
+                    'note' => 'Applications are reviewed individually.',
+                ]),
                 'sort_order' => 19,
             ],
         ];

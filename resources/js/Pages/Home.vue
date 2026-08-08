@@ -21,6 +21,9 @@
                 <Link v-if="s('hero').cta_text" :href="s('hero').cta_url || '/apply'" class="inline-block mt-10 px-8 py-3.5 bg-gold text-black text-xs tracking-[0.3em] uppercase font-sans font-semibold hover:bg-gold-light active:bg-gold-deep transition-colors duration-400">
                     {{ s('hero').cta_text }}
                 </Link>
+                <p v-if="metaVal(s('hero'), 'cta_note')" class="text-warm-grey text-[11px] md:text-xs tracking-[0.08em] mt-5 max-w-md mx-auto leading-relaxed">
+                    {{ metaVal(s('hero'), 'cta_note') }}
+                </p>
             </div>
             <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
                 <div class="w-5 h-8 border border-gold/40 rounded-full flex justify-center pt-1.5">
@@ -56,7 +59,7 @@
         <!-- The Method Preview (6 Pillars) -->
         <section v-if="s('pillars')" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-5xl mx-auto">
-                <div class="flex items-end justify-between mb-12">
+                <div class="flex items-end justify-between mb-6">
                     <div>
                         <p v-if="s('pillars').eyebrow" class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ s('pillars').eyebrow }}</p>
                         <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em]">{{ s('pillars').headline }}</h2>
@@ -65,6 +68,7 @@
                         Explore the Method
                     </Link>
                 </div>
+                <p v-if="s('pillars').subheadline" class="text-text-body text-base leading-relaxed max-w-3xl mb-12">{{ s('pillars').subheadline }}</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <Link
                         v-for="pillar in parseMeta(s('pillars'), 'pillars')"
@@ -271,6 +275,9 @@
                 <Link v-if="s('cta').cta_text" :href="s('cta').cta_url || '/apply'" class="inline-block px-10 py-4 bg-gold text-black text-xs tracking-[0.3em] uppercase font-sans font-semibold hover:bg-gold-light active:bg-gold-deep transition-colors duration-400">
                     {{ s('cta').cta_text }}
                 </Link>
+                <p v-if="metaVal(s('cta'), 'note')" class="text-warm-grey text-[11px] md:text-xs tracking-[0.08em] mt-5">
+                    {{ metaVal(s('cta'), 'note') }}
+                </p>
             </div>
         </section>
     </AppLayout>
@@ -323,6 +330,12 @@ function parseMeta(section, key) {
     if (!section?.metadata) return [];
     const meta = typeof section.metadata === 'string' ? JSON.parse(section.metadata) : section.metadata;
     return meta[key] || [];
+}
+
+function metaVal(section, key) {
+    if (!section?.metadata) return '';
+    const meta = typeof section.metadata === 'string' ? JSON.parse(section.metadata) : section.metadata;
+    return meta?.[key] || '';
 }
 
 function formatDate(date) {
