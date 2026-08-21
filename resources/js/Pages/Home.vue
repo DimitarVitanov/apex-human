@@ -136,7 +136,7 @@
                     <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] mb-8 leading-tight">{{ s('for_whom').headline }}</h2>
                     <div class="text-text-body text-base leading-[1.85] whitespace-pre-line">{{ s('for_whom').body }}</div>
                     <Link href="/apply" class="inline-block mt-8 px-8 py-3.5 bg-gold text-black text-xs tracking-[0.3em] uppercase font-sans font-semibold hover:bg-gold-light active:bg-gold-deep transition-colors duration-400">
-                        Start Your Application
+                        Apply For Private Coaching
                     </Link>
                 </div>
                 <div class="relative">
