@@ -82,6 +82,25 @@ return [
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Available Locales
+    |--------------------------------------------------------------------------
+    |
+    | The locales the public site can be served in. English ('en') is the base
+    | / source language; Macedonian ('mk') is served automatically to visitors
+    | in Macedonia (see App\Http\Middleware\SetLocale) and can be chosen
+    | manually via the language switcher. Country codes here trigger 'mk'.
+    |
+    */
+
+    'available_locales' => [
+        'en' => 'English',
+        'mk' => 'Македонски',
+    ],
+
+    'mk_countries' => ['MK'],
+
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
     /*

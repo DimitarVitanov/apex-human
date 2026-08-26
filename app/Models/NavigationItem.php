@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 
 class NavigationItem extends Model
 {
+    use HasTranslations;
+
     protected $guarded = [];
 
     protected $casts = [
@@ -13,6 +16,8 @@ class NavigationItem extends Model
         'is_external' => 'boolean',
         'is_visible' => 'boolean',
     ];
+
+    protected array $translatable = ['label'];
 
     public function scopeForLocation($query, string $location)
     {

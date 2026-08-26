@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
 class SiteSetting extends Model
 {
+    use HasTranslations;
+
     protected $guarded = [];
+
+    /** The setting's value can carry a Macedonian override. */
+    protected array $translatable = ['value'];
 
     public static function get(string $key, $default = null): ?string
     {

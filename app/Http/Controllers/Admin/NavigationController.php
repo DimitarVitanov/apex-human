@@ -12,9 +12,17 @@ class NavigationController extends Controller
 {
     public function index()
     {
+        $map = fn ($location) => NavigationItem::where('location', $location)
+            ->orderBy('sort_order')->get()
+            ->map(fn (NavigationItem $item) => array_merge(
+                $item->getRawOriginal(),
+                ['label_mk' => data_get($item->translations, 'mk.label')],
+            ));
+
         return Inertia::render('Admin/Navigation/Index', [
-            'headerItems' => NavigationItem::where('location', 'header')->orderBy('sort_order')->get(),
-            'footerItems' => NavigationItem::where('location', 'footer')->orderBy('sort_order')->get(),
+            'headerItems' => $map('header'),
+            'footerItems' => $map('footer'),
+            'locales' => config('app.available_locales'),
         ]);
     }
 
@@ -27,11 +35,17 @@ class NavigationController extends Controller
             'is_cta' => 'boolean',
             'is_external' => 'boolean',
             'sort_order' => 'integer',
+            'translations.mk.label' => 'nullable|string|max:255',
         ]);
 
-        NavigationItem::create($data);
+        $mk = $data['translations']['mk'] ?? [];
+        unset($data['translations']);
 
-        Cache::forget('nav_items');
+        $item = new NavigationItem($data);
+        $item->setTranslations('mk', $mk);
+        $item->save();
+
+        $this->flushNavCache();
 
         return back()->with('success', 'Navigation item added.');
     }
@@ -45,11 +59,17 @@ class NavigationController extends Controller
             'is_external' => 'boolean',
             'is_visible' => 'boolean',
             'sort_order' => 'integer',
+            'translations.mk.label' => 'nullable|string|max:255',
         ]);
 
-        $navigation->update($data);
+        $mk = $data['translations']['mk'] ?? [];
+        unset($data['translations']);
 
-        Cache::forget('nav_items');
+        $navigation->fill($data);
+        $navigation->setTranslations('mk', $mk);
+        $navigation->save();
+
+        $this->flushNavCache();
 
         return back()->with('success', 'Navigation item updated.');
     }
@@ -58,8 +78,16 @@ class NavigationController extends Controller
     {
         $navigation->delete();
 
-        Cache::forget('nav_items');
+        $this->flushNavCache();
 
         return back()->with('success', 'Navigation item deleted.');
+    }
+
+    /** Navigation is cached per locale; clear every language's copy. */
+    private function flushNavCache(): void
+    {
+        foreach (array_keys(config('app.available_locales', ['en' => 'English'])) as $locale) {
+            Cache::forget("nav_items_{$locale}");
+        }
     }
 }

@@ -4,9 +4,13 @@ use App\Http\Controllers\Admin;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
+
+// Language switcher
+Route::get('/lang/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
 
 // Public pages
 Route::get('/', [PageController::class, 'home'])->name('home');

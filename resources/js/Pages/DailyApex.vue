@@ -12,7 +12,7 @@
         <section class="scroll-section py-10 md:py-16 px-6">
             <div class="max-w-5xl mx-auto space-y-8">
                 <article v-for="post in posts.data" :key="post.id" class="border-l-2 border-gold pl-6 py-2">
-                    <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold">{{ post.category || 'Daily Apex' }}</p>
+                    <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold">{{ post.category || t('daily.category', 'Daily Apex') }}</p>
                     <h2 class="font-display text-off-white text-lg tracking-wide mt-2">{{ post.headline }}</h2>
                     <p class="text-text-body text-sm leading-relaxed mt-3">{{ post.body }}</p>
                     <p class="text-warm-grey text-xs mt-3">{{ formatDate(post.published_at) }}</p>
@@ -25,8 +25,11 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { usePageAnimations } from '@/Composables/useScrollReveal.js';
+import { useI18n } from '@/Composables/useI18n';
 
 const props = defineProps({ page: Object, sections: Object, posts: Object });
+
+const { t } = useI18n();
 
 usePageAnimations();
 

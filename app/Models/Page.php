@@ -2,15 +2,23 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Page extends Model
 {
+    use HasTranslations;
+
     protected $guarded = [];
 
     protected $casts = [
         'is_published' => 'boolean',
+    ];
+
+    /** Page-level SEO copy is translatable (the slug/URL stays constant). */
+    protected array $translatable = [
+        'title', 'meta_title', 'meta_description',
     ];
 
     public function sections(): HasMany

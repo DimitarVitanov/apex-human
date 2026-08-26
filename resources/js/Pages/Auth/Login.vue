@@ -5,7 +5,7 @@
 
             <form @submit.prevent="submit" class="space-y-5">
                 <div>
-                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">Email</label>
+                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">{{ t('login.email', 'Email') }}</label>
                     <input
                         v-model="form.email"
                         type="email"
@@ -16,7 +16,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">Password</label>
+                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">{{ t('login.password', 'Password') }}</label>
                     <input
                         v-model="form.password"
                         type="password"
@@ -27,7 +27,7 @@
 
                 <div class="flex items-center gap-2">
                     <input v-model="form.remember" type="checkbox" id="remember" class="accent-gold">
-                    <label for="remember" class="text-warm-grey text-xs">Remember me</label>
+                    <label for="remember" class="text-warm-grey text-xs">{{ t('login.remember_me', 'Remember me') }}</label>
                 </div>
 
                 <button
@@ -35,7 +35,7 @@
                     :disabled="form.processing"
                     class="w-full py-3 bg-gold text-black text-xs tracking-[0.3em] uppercase font-sans font-semibold hover:bg-gold-light active:bg-gold-deep transition-colors duration-400 disabled:opacity-50"
                 >
-                    {{ form.processing ? 'Signing in...' : 'Sign In' }}
+                    {{ form.processing ? t('login.signing_in', 'Signing in...') : t('login.sign_in', 'Sign In') }}
                 </button>
             </form>
         </div>
@@ -44,6 +44,9 @@
 
 <script setup>
 import { useForm } from '@inertiajs/vue3';
+import { useI18n } from '@/Composables/useI18n';
+
+const { t } = useI18n();
 
 const form = useForm({
     email: '',

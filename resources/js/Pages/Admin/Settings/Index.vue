@@ -7,9 +7,21 @@
                     <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold mb-4">{{ group }}</p>
                     <div class="space-y-4">
                         <div v-for="setting in items" :key="setting.key">
-                            <label class="block text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-1">{{ setting.label || setting.key }}</label>
+                            <label class="block text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-1">
+                                {{ setting.label || setting.key }}
+                                <span v-if="setting.translatable" class="text-gold/60 normal-case tracking-normal">· EN</span>
+                            </label>
                             <textarea v-if="setting.type === 'textarea'" v-model="formData[setting.key]" rows="3" class="w-full bg-transparent border border-gold-deep/30 text-off-white text-sm px-3 py-2 rounded focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
                             <input v-else v-model="formData[setting.key]" class="w-full bg-transparent border border-gold-deep/30 text-off-white text-sm px-3 py-2 rounded focus:outline-none focus:border-gold transition-colors">
+
+                            <!-- Macedonian override (only for translatable copy) -->
+                            <template v-if="setting.translatable">
+                                <label class="block text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-1 mt-2">
+                                    {{ setting.label || setting.key }} <span class="text-gold/60 normal-case tracking-normal">· MK (Македонски)</span>
+                                </label>
+                                <textarea v-if="setting.type === 'textarea'" v-model="formDataMk[setting.key]" rows="3" :placeholder="formData[setting.key]" class="w-full bg-transparent border border-gold-deep/30 text-off-white text-sm px-3 py-2 rounded focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
+                                <input v-else v-model="formDataMk[setting.key]" :placeholder="formData[setting.key]" class="w-full bg-transparent border border-gold-deep/30 text-off-white text-sm px-3 py-2 rounded focus:outline-none focus:border-gold transition-colors">
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -63,12 +75,22 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 const props = defineProps({ settings: Object });
 
 const formData = reactive({});
-Object.values(props.settings).flat().forEach(s => { formData[s.key] = s.value; });
+const formDataMk = reactive({});
+const translatable = reactive({});
+Object.values(props.settings).flat().forEach(s => {
+    formData[s.key] = s.value;
+    formDataMk[s.key] = s.value_mk ?? '';
+    translatable[s.key] = !!s.translatable;
+});
 
 const form = useForm({});
 
 function save() {
-    const settingsArray = Object.entries(formData).map(([key, value]) => ({ key, value }));
+    const settingsArray = Object.keys(formData).map((key) => ({
+        key,
+        value: formData[key],
+        value_mk: translatable[key] ? formDataMk[key] : null,
+    }));
     form.transform(() => ({ settings: settingsArray })).put('/admin/settings');
 }
 

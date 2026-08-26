@@ -4,7 +4,20 @@
 
         <form @submit.prevent="savePage" class="bg-black-warm border border-gold-deep/20 rounded p-6 mb-8">
             <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-4">Page Settings</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- Page language tabs -->
+            <div class="flex items-center gap-1 border-b border-gold-deep/20 mb-4">
+                <button
+                    v-for="l in langTabs"
+                    :key="l.code"
+                    type="button"
+                    @click="pageLang = l.code"
+                    class="px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] font-semibold border-b-2 -mb-px transition-colors"
+                    :class="pageLang === l.code ? 'border-gold text-gold' : 'border-transparent text-warm-grey hover:text-off-white'"
+                >{{ l.label }}</button>
+            </div>
+
+            <!-- English -->
+            <div v-show="pageLang === 'en'" class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                     <label class="block text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-1.5">Title</label>
                     <input v-model="pageForm.title" class="w-full bg-transparent border border-gold-deep/30 text-off-white text-sm px-3 py-2 rounded focus:outline-none focus:border-gold transition-colors">
@@ -17,10 +30,27 @@
                     <label class="block text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-1.5">Meta Description</label>
                     <textarea v-model="pageForm.meta_description" rows="2" class="w-full bg-transparent border border-gold-deep/30 text-off-white text-sm px-3 py-2 rounded focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
                 </div>
-                <div class="flex items-center gap-2">
-                    <input v-model="pageForm.is_published" type="checkbox" id="published" class="accent-gold">
-                    <label for="published" class="text-warm-grey text-xs">Published</label>
+            </div>
+
+            <!-- Macedonian -->
+            <div v-show="pageLang === 'mk'" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-1.5">Наслов (Title)</label>
+                    <input v-model="pageForm.translations.mk.title" :placeholder="pageForm.title" class="w-full bg-transparent border border-gold-deep/30 text-off-white text-sm px-3 py-2 rounded focus:outline-none focus:border-gold transition-colors">
                 </div>
+                <div>
+                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-1.5">Мета наслов (Meta Title)</label>
+                    <input v-model="pageForm.translations.mk.meta_title" :placeholder="pageForm.meta_title" class="w-full bg-transparent border border-gold-deep/30 text-off-white text-sm px-3 py-2 rounded focus:outline-none focus:border-gold transition-colors">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.3em] font-semibold mb-1.5">Мета опис (Meta Description)</label>
+                    <textarea v-model="pageForm.translations.mk.meta_description" rows="2" :placeholder="pageForm.meta_description" class="w-full bg-transparent border border-gold-deep/30 text-off-white text-sm px-3 py-2 rounded focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 mt-4">
+                <input v-model="pageForm.is_published" type="checkbox" id="published" class="accent-gold">
+                <label for="published" class="text-warm-grey text-xs">Published</label>
             </div>
             <button type="submit" :disabled="pageForm.processing" class="mt-4 px-5 py-2 bg-gold text-black text-xs tracking-[0.2em] uppercase font-semibold hover:bg-gold-light transition-colors">Save Page</button>
         </form>
@@ -53,13 +83,30 @@ import { useForm } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import SectionEditor from '@/Components/Admin/SectionEditor.vue';
 
-const props = defineProps({ page: Object });
+const props = defineProps({
+    page: Object,
+    locales: { type: Object, default: () => ({ en: 'English', mk: 'Македонски' }) },
+});
+
+const langTabs = [
+    { code: 'en', label: 'English' },
+    { code: 'mk', label: 'Македонски' },
+];
+const pageLang = ref('en');
+const pageMk = props.page.translations?.mk || {};
 
 const pageForm = useForm({
     title: props.page.title,
     meta_title: props.page.meta_title,
     meta_description: props.page.meta_description,
     is_published: props.page.is_published,
+    translations: {
+        mk: {
+            title: pageMk.title || '',
+            meta_title: pageMk.meta_title || '',
+            meta_description: pageMk.meta_description || '',
+        },
+    },
 });
 
 const openSections = ref([]);

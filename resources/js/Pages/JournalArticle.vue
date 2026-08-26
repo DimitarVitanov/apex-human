@@ -18,7 +18,7 @@
         <!-- Related Posts -->
         <section v-if="related.length" class="scroll-section py-10 md:py-16 px-6 border-t border-gold-deep/10">
             <div class="max-w-5xl mx-auto">
-                <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold mb-8 text-center">More from The Journal</p>
+                <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold mb-8 text-center">{{ t('article.more_from_journal', 'More from The Journal') }}</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <Link v-for="r in related" :key="r.id" :href="`/journal/${r.slug}`" class="group block border border-gold-deep/20 hover:border-gold/30 transition-colors duration-400 p-6">
                         <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold">{{ r.category }}</p>
@@ -35,8 +35,11 @@
 import { Link } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { usePageAnimations } from '@/Composables/useScrollReveal.js';
+import { useI18n } from '@/Composables/useI18n';
 
 defineProps({ post: Object, related: Array });
+
+const { t } = useI18n();
 
 usePageAnimations();
 </script>

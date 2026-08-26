@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 
 class DailyApex extends Model
 {
+    use HasTranslations;
+
     protected $table = 'daily_apex';
 
     protected $guarded = [];
@@ -14,6 +17,8 @@ class DailyApex extends Model
         'is_published' => 'boolean',
         'published_at' => 'datetime',
     ];
+
+    protected array $translatable = ['headline', 'body', 'category'];
 
     public function scopePublished($query)
     {

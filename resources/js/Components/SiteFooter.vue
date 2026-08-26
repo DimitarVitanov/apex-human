@@ -5,9 +5,9 @@
                 <div>
                     <p class="font-display text-gold text-[22px] tracking-[0.18em]">APEX HUMAN&#8482;</p>
                     <p class="mt-3 font-serif italic text-off-white text-base leading-relaxed">
-                        The Apex isn't a body. It's a life.
+                        {{ t('footer.tagline', "The Apex isn't a body. It's a life.") }}
                     </p>
-                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mt-8 mb-4">Follow Us</p>
+                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mt-8 mb-4">{{ t('footer.follow_us', 'Follow Us') }}</p>
                     <div class="flex items-center gap-4">
                         <a
                             href="mailto:coach@apexhuman.co"
@@ -22,7 +22,7 @@
                 </div>
 
                 <div>
-                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-5">Navigate</p>
+                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-5">{{ t('footer.navigate', 'Navigate') }}</p>
                     <div class="flex flex-col gap-3">
                         <Link
                             v-for="item in footerNav"
@@ -36,7 +36,7 @@
                 </div>
 
                 <div>
-                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-5">Connect</p>
+                    <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-5">{{ t('footer.connect', 'Connect') }}</p>
                     <div class="flex flex-col gap-3">
                         <a
                             href="mailto:coach@apexhuman.co"
@@ -49,20 +49,20 @@
                             href="/apply"
                             class="text-gold text-sm tracking-wide hover:text-gold-light transition-colors duration-200 cursor-none"
                         >
-                            Apply for Private Coaching &rarr;
+                            {{ t('footer.apply_cta', 'Apply for Private Coaching') }} &rarr;
                         </Link>
                     </div>
                 </div>
             </div>
 
             <div class="mt-8 pt-8 border-t border-gold-deep/20">
-                <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-4">Not ready to apply?</p>
-                <p class="text-warm-grey text-sm mb-4">Get the Apex Letter. One email when it matters. No noise.</p>
+                <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-4">{{ t('footer.not_ready', 'Not ready to apply?') }}</p>
+                <p class="text-warm-grey text-sm mb-4">{{ t('footer.newsletter_pitch', 'Get the Apex Letter. One email when it matters. No noise.') }}</p>
                 <form @submit.prevent="subscribeNewsletter" class="flex gap-0 max-w-md border-b border-gold-deep focus-within:border-gold transition-colors duration-400">
                     <input
                         v-model="email"
                         type="email"
-                        placeholder="you@example.com"
+                        :placeholder="t('footer.email_placeholder', 'you@example.com')"
                         required
                         class="flex-1 bg-transparent text-off-white text-sm font-sans py-3 focus:outline-none placeholder:text-warm-grey placeholder:italic cursor-none"
                     >
@@ -70,19 +70,19 @@
                         type="submit"
                         class="text-gold text-xs uppercase tracking-[0.3em] font-sans font-semibold px-4 py-3 hover:text-gold-light transition-colors duration-200 cursor-none"
                     >
-                        Subscribe
+                        {{ t('footer.subscribe', 'Subscribe') }}
                     </button>
                 </form>
-                <p v-if="subscribed" class="text-gold-light text-sm mt-3">You're in. Watch your inbox.</p>
+                <p v-if="subscribed" class="text-gold-light text-sm mt-3">{{ t('footer.subscribed', "You're in. Watch your inbox.") }}</p>
             </div>
         </div>
 
         <div class="border-t border-gold-deep/20 py-6 px-6 lg:px-12">
             <div class="mx-auto max-w-[1440px] text-center space-y-2">
                 <div class="flex items-center justify-center gap-2 text-warm-grey text-[10px] uppercase tracking-[0.2em]">
-                    <Link href="/privacy-policy" class="hover:text-gold-light transition-colors duration-200">Privacy Policy</Link>
+                    <Link href="/privacy-policy" class="hover:text-gold-light transition-colors duration-200">{{ t('footer.privacy_policy', 'Privacy Policy') }}</Link>
                     <span>&middot;</span>
-                    <Link href="/terms-of-service" class="hover:text-gold-light transition-colors duration-200">Terms of Service</Link>
+                    <Link href="/terms-of-service" class="hover:text-gold-light transition-colors duration-200">{{ t('footer.terms_of_service', 'Terms of Service') }}</Link>
                 </div>
                 <p class="text-warm-grey text-[10px] uppercase tracking-[0.2em]">
                     &copy; {{ currentYear }} APEX HUMAN&#8482; &middot; ALL RIGHTS RESERVED &middot; apexhuman.co
@@ -95,6 +95,9 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import { useI18n } from '@/Composables/useI18n';
+
+const { t } = useI18n();
 
 const page = usePage();
 const footerNav = computed(() => page.props.navigation?.footer || []);

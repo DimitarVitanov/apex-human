@@ -18,17 +18,17 @@
         <section v-else class="scroll-section py-10 md:py-16 px-6">
             <form @submit.prevent="submit" class="max-w-5xl mx-auto space-y-6">
                 <div>
-                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">Name *</label>
+                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">{{ t('contact.label_name', 'Name *') }}</label>
                     <input v-model="form.name" type="text" required class="w-full bg-transparent border-b border-gold-deep text-off-white text-sm py-2.5 focus:outline-none focus:border-gold transition-colors">
                     <p v-if="form.errors.name" class="text-red-400 text-xs mt-1">{{ form.errors.name }}</p>
                 </div>
                 <div>
-                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">Email *</label>
+                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">{{ t('contact.label_email', 'Email *') }}</label>
                     <input v-model="form.email" type="email" required class="w-full bg-transparent border-b border-gold-deep text-off-white text-sm py-2.5 focus:outline-none focus:border-gold transition-colors">
                     <p v-if="form.errors.email" class="text-red-400 text-xs mt-1">{{ form.errors.email }}</p>
                 </div>
                 <div>
-                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">Message *</label>
+                    <label class="block text-warm-grey text-[9px] uppercase tracking-[0.4em] font-sans font-semibold mb-2">{{ t('contact.label_message', 'Message *') }}</label>
                     <textarea v-model="form.message" rows="6" required class="w-full bg-transparent border border-gold-deep/30 text-off-white text-sm px-3 py-2.5 rounded focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
                     <p v-if="form.errors.message" class="text-red-400 text-xs mt-1">{{ form.errors.message }}</p>
                 </div>
@@ -37,7 +37,7 @@
                     :disabled="form.processing"
                     class="w-full py-3.5 bg-gold text-black text-xs tracking-[0.3em] uppercase font-sans font-semibold hover:bg-gold-light active:bg-gold-deep transition-colors duration-400 disabled:opacity-50"
                 >
-                    {{ form.processing ? 'Sending...' : 'Send Message' }}
+                    {{ form.processing ? t('contact.sending', 'Sending...') : t('contact.send_message', 'Send Message') }}
                 </button>
             </form>
         </section>
@@ -45,7 +45,7 @@
         <!-- Contact Info -->
         <section class="scroll-section py-10 md:py-16 px-6 border-t border-gold-deep/10">
             <div class="max-w-5xl mx-auto text-center space-y-4">
-                <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-semibold">Or reach us directly</p>
+                <p class="text-warm-grey text-[9px] uppercase tracking-[0.4em] font-semibold">{{ t('contact.reach_directly', 'Or reach us directly') }}</p>
                 <p class="text-off-white text-sm">coach@apexhuman.co</p>
             </div>
         </section>
@@ -56,11 +56,13 @@
 import { useForm, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import { usePageAnimations } from '@/Composables/useScrollReveal.js';
+import { useI18n } from '@/Composables/useI18n';
 
 const props = defineProps({ page: Object, sections: Object });
 
 usePageAnimations();
 const $page = usePage();
+const { t } = useI18n();
 
 function s(key) { return props.sections?.[key] || null; }
 

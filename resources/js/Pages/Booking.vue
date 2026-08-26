@@ -1,20 +1,20 @@
 <template>
-    <AppLayout title="Book Your Discovery Call">
+    <AppLayout :title="t('booking.page_title', 'Book Your Discovery Call')">
         <section class="min-h-screen flex items-center justify-center px-6 py-32">
             <div class="max-w-5xl mx-auto w-full">
 
                 <!-- Header -->
                 <div class="text-center mb-16">
-                    <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">You Have Been Selected</p>
-                    <h1 class="font-display text-gold-light text-3xl md:text-5xl tracking-[0.06em] leading-tight mb-4">The Discovery Call.</h1>
+                    <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ t('booking.eyebrow', 'You Have Been Selected') }}</p>
+                    <h1 class="font-display text-gold-light text-3xl md:text-5xl tracking-[0.06em] leading-tight mb-4">{{ t('booking.headline', 'The Discovery Call.') }}</h1>
                     <p class="text-text-body text-sm leading-relaxed max-w-lg mx-auto">
-                        Thirty minutes on Google Meet. We'll talk through your context, your goals, and whether the system is the right fit.
+                        {{ t('booking.intro', "Thirty minutes on Google Meet. We'll talk through your context, your goals, and whether the system is the right fit.") }}
                     </p>
                 </div>
 
                 <!-- Calendar -->
                 <div class="mb-8">
-                    <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-6">Select a Date</p>
+                    <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-6">{{ t('booking.select_date', 'Select a Date') }}</p>
 
                     <!-- Month Navigation -->
                     <div class="flex items-center gap-6 mb-6">
@@ -52,7 +52,7 @@
                 <Transition name="fade">
                     <div v-if="selectedDate" class="mb-12">
                         <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-6">
-                            Selected: {{ formatSelectedDate }} · Available Times
+                            {{ t('booking.selected_label', 'Selected') }}: {{ formatSelectedDate }} · {{ t('booking.available_times', 'Available Times') }}
                         </p>
                         <div v-if="selectedDateSlots.length" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-0">
                             <button
@@ -67,7 +67,7 @@
                                 {{ slot.start_time.substring(0, 5) }}
                             </button>
                         </div>
-                        <p v-else class="text-warm-grey text-sm">No available times on this date.</p>
+                        <p v-else class="text-warm-grey text-sm">{{ t('booking.no_times', 'No available times on this date.') }}</p>
                     </div>
                 </Transition>
 
@@ -79,9 +79,9 @@
                             :disabled="bookingForm.processing"
                             class="inline-block px-12 py-4 bg-gold text-black text-xs tracking-[0.3em] uppercase font-sans font-semibold hover:bg-gold-light active:bg-gold-deep transition-colors duration-400 disabled:opacity-40"
                         >
-                            {{ bookingForm.processing ? 'Confirming...' : 'Confirm Booking' }}
+                            {{ bookingForm.processing ? t('booking.confirming', 'Confirming...') : t('booking.confirm_booking', 'Confirm Booking') }}
                         </button>
-                        <p class="text-warm-grey text-xs mt-4">You'll receive a calendar invite within 60 seconds.</p>
+                        <p class="text-warm-grey text-xs mt-4">{{ t('booking.invite_note', "You'll receive a calendar invite within 60 seconds.") }}</p>
                     </div>
                 </Transition>
 
@@ -99,9 +99,11 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
+import { useI18n } from '@/Composables/useI18n';
 
 const props = defineProps({ token: String, applicantName: String });
 const $page = usePage();
+const { t } = useI18n();
 
 const slots = ref([]);
 const loading = ref(false);

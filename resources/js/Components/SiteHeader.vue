@@ -23,8 +23,10 @@
                 </Link>
             </div>
 
-            <div v-if="ctaItem" class="hidden lg:block">
+            <div class="hidden lg:flex items-center gap-6">
+                <LanguageSwitcher />
                 <Link
+                    v-if="ctaItem"
                     :href="ctaItem.url"
                     class="inline-block px-6 py-2.5 bg-gold text-black text-xs tracking-[0.3em] uppercase font-sans font-semibold hover:bg-gold-light active:bg-gold-deep transition-colors duration-400 cursor-none"
                 >
@@ -82,6 +84,9 @@
                         {{ item.label }}
                     </Link>
                 </template>
+                <div class="pt-4">
+                    <LanguageSwitcher />
+                </div>
             </div>
         </Transition>
     </header>
@@ -90,6 +95,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
+import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
 
 const page = usePage();
 const allItems = computed(() => page.props.navigation?.header || []);

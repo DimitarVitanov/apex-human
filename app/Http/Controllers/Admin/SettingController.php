@@ -20,10 +20,28 @@ use Inertia\Inertia;
 
 class SettingController extends Controller
 {
+    /** Settings that are user-facing copy and worth translating to Macedonian. */
+    private array $translatableKeys = [
+        'tagline',
+        'default_meta_title',
+        'default_meta_description',
+        'footer_newsletter_headline',
+        'footer_newsletter_sub',
+    ];
+
     public function index()
     {
+        $settings = SiteSetting::all()->map(function (SiteSetting $setting) {
+            $data = $setting->getRawOriginal();
+            $data['translatable'] = in_array($setting->key, $this->translatableKeys, true);
+            $data['value_mk'] = data_get($setting->translations, 'mk.value');
+
+            return (object) $data;
+        })->groupBy('group');
+
         return Inertia::render('Admin/Settings/Index', [
-            'settings' => SiteSetting::all()->groupBy('group'),
+            'settings' => $settings,
+            'locales' => config('app.available_locales'),
         ]);
     }
 
@@ -33,13 +51,24 @@ class SettingController extends Controller
             'settings' => 'required|array',
             'settings.*.key' => 'required|string',
             'settings.*.value' => 'nullable|string',
+            'settings.*.value_mk' => 'nullable|string',
         ]);
 
         foreach ($request->settings as $setting) {
-            SiteSetting::set($setting['key'], $setting['value']);
+            $model = SiteSetting::firstOrNew(['key' => $setting['key']]);
+            $model->value = $setting['value'];
+
+            if (in_array($setting['key'], $this->translatableKeys, true)) {
+                $model->setTranslations('mk', ['value' => $setting['value_mk'] ?? null]);
+            }
+
+            $model->save();
         }
 
-        Cache::forget('site_settings');
+        foreach (array_keys(config('app.available_locales', ['en' => 'English'])) as $locale) {
+            Cache::forget("site_settings_{$locale}");
+        }
+        Cache::forget('site_settings'); // legacy key, safe to clear
 
         return back()->with('success', 'Settings updated.');
     }

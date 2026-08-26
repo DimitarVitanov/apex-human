@@ -65,7 +65,7 @@
                         <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em]">{{ s('pillars').headline }}</h2>
                     </div>
                     <Link href="/method" class="hidden md:inline-block text-gold text-xs tracking-[0.2em] uppercase font-semibold hover:text-gold-light transition-colors border-b border-gold/30 pb-0.5">
-                        Explore the Method
+                        {{ t('home.explore_method', 'Explore the Method') }}
                     </Link>
                 </div>
                 <p v-if="s('pillars').subheadline" class="text-text-body text-base leading-relaxed max-w-3xl mb-12">{{ s('pillars').subheadline }}</p>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="mt-8 text-center md:hidden">
                     <Link href="/method" class="text-gold text-xs tracking-[0.2em] uppercase font-semibold hover:text-gold-light transition-colors border-b border-gold/30 pb-0.5">
-                        Explore the Method
+                        {{ t('home.explore_method', 'Explore the Method') }}
                     </Link>
                 </div>
             </div>
@@ -136,7 +136,7 @@
                     <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] mb-8 leading-tight">{{ s('for_whom').headline }}</h2>
                     <div class="text-text-body text-base leading-[1.85] whitespace-pre-line">{{ s('for_whom').body }}</div>
                     <Link href="/apply" class="inline-block mt-8 px-8 py-3.5 bg-gold text-black text-xs tracking-[0.3em] uppercase font-sans font-semibold hover:bg-gold-light active:bg-gold-deep transition-colors duration-400">
-                        Apply For Private Coaching
+                        {{ t('home.apply_cta', 'Apply For Private Coaching') }}
                     </Link>
                 </div>
                 <div class="relative">
@@ -181,11 +181,11 @@
             <div class="max-w-5xl mx-auto">
                 <div class="flex items-end justify-between mb-12">
                     <div>
-                        <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">Insights &amp; Knowledge</p>
-                        <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em]">The Journal</h2>
+                        <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ t('home.journal_eyebrow', 'Insights & Knowledge') }}</p>
+                        <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em]">{{ t('home.journal_title', 'The Journal') }}</h2>
                     </div>
                     <Link href="/journal" class="hidden md:inline-block text-gold text-xs tracking-[0.2em] uppercase font-semibold hover:text-gold-light transition-colors border-b border-gold/30 pb-0.5">
-                        View All Articles
+                        {{ t('home.view_all_articles', 'View All Articles') }}
                     </Link>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -214,7 +214,7 @@
                 </div>
                 <div class="mt-8 text-center md:hidden">
                     <Link href="/journal" class="text-gold text-xs tracking-[0.2em] uppercase font-semibold hover:text-gold-light transition-colors border-b border-gold/30 pb-0.5">
-                        View All Articles
+                        {{ t('home.view_all_articles', 'View All Articles') }}
                     </Link>
                 </div>
             </div>
@@ -229,11 +229,11 @@
         <section v-if="latestDailyApex.length" class="scroll-section py-14 md:py-24 lg:py-32 px-6">
             <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
                 <div class="lg:col-span-1">
-                    <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">Daily Practice</p>
-                    <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] mb-4">Daily Apex</h2>
-                    <p class="text-text-body text-sm leading-relaxed">Short, potent insights delivered daily. Each one a catalyst for the day ahead.</p>
+                    <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-4">{{ t('home.daily_practice_eyebrow', 'Daily Practice') }}</p>
+                    <h2 class="font-display text-gold-light text-3xl md:text-4xl tracking-[0.06em] mb-4">{{ t('home.daily_apex_title', 'Daily Apex') }}</h2>
+                    <p class="text-text-body text-sm leading-relaxed">{{ t('home.daily_apex_desc', 'Short, potent insights delivered daily. Each one a catalyst for the day ahead.') }}</p>
                     <Link href="/daily-apex" class="inline-block mt-6 text-gold text-xs tracking-[0.2em] uppercase font-semibold hover:text-gold-light transition-colors border-b border-gold/30 pb-0.5">
-                        View Full Archive
+                        {{ t('home.view_full_archive', 'View Full Archive') }}
                     </Link>
                 </div>
                 <div class="lg:col-span-2 space-y-0">
@@ -244,7 +244,7 @@
                         :class="i < latestDailyApex.length - 1 ? 'border-b border-b-gold-deep/10' : ''"
                     >
                         <div class="flex items-center gap-3 mb-2">
-                            <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold">{{ apex.category || 'Daily Apex' }}</p>
+                            <p class="text-gold text-[9px] uppercase tracking-[0.4em] font-semibold">{{ apex.category || t('home.daily_apex_title', 'Daily Apex') }}</p>
                             <span class="text-gold-deep/40">&middot;</span>
                             <p class="text-warm-grey text-[9px] uppercase tracking-[0.2em]">{{ formatDate(apex.published_at) }}</p>
                         </div>
@@ -258,7 +258,7 @@
         <!-- The Anti-Testimonial -->
         <section class="scroll-section py-16 md:py-32 lg:py-44 px-6">
             <div class="max-w-3xl mx-auto text-center">
-                <p class="font-serif italic text-gold text-2xl md:text-3xl lg:text-4xl leading-relaxed tracking-wide">"We do not publish names, photos, or testimonials. The work is private. The work is the proof."</p>
+                <p class="font-serif italic text-gold text-2xl md:text-3xl lg:text-4xl leading-relaxed tracking-wide">"{{ t('home.anti_testimonial', 'We do not publish names, photos, or testimonials. The work is private. The work is the proof.') }}"</p>
                 <p class="font-serif italic text-gold text-base md:text-lg tracking-wide mt-8">— Apex Human</p>
             </div>
         </section>
@@ -289,6 +289,7 @@ import { Link } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import GoldLightning from '@/Components/GoldLightning.vue';
 import { usePageAnimations } from '@/Composables/useScrollReveal.js';
+import { useI18n } from '@/Composables/useI18n';
 
 const props = defineProps({
     page: Object,
@@ -296,6 +297,8 @@ const props = defineProps({
     latestPosts: { type: Array, default: () => [] },
     latestDailyApex: { type: Array, default: () => [] },
 });
+
+const { t } = useI18n();
 
 usePageAnimations();
 
