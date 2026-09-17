@@ -27,7 +27,7 @@ class HomePageSeeder extends Seeder
                 'type' => 'hero',
                 'eyebrow' => 'FOR THE MAN WHO REFUSES TO MAKE FITNESS A HOBBY',
                 'headline' => 'The body to match the life you already built',
-                'subheadline' => 'Private training, nutrition and performance coaching for men who have built successful lives—and now expect the same standard from their bodies.',
+                'subheadline' => 'Private training, nutrition and performance coaching for men whose physical standard has fallen behind the life they’ve built.',
                 'quote' => "THE APEX ISN'T A BODY. IT'S A LIFE.",
                 'cta_text' => 'Apply for Private Coaching',
                 'cta_url' => '/apply',
@@ -207,7 +207,7 @@ class HomePageSeeder extends Seeder
                 'body' => 'We don\'t publish client names, photos or personal stories without permission. What we can share is what clients tell us about the work.',
                 'metadata' => json_encode([
                     'testimonials' => [
-                        ['name' => 'Client, 42 · CEO', 'quote' => 'I\'ve worked with trainers for fifteen years. This is the first time someone built a system around my calendar instead of asking me to build my calendar around a system.', 'result' => '-14kg body fat · bloodwork in top 5% for age'],
+                        ['name' => 'CLIENT 042', 'meta' => '46 · CEO', 'commitment' => '24-month commitment', 'stats' => ['−28 kg', '112 kg → 84 kg', '−24 cm waist']],
                         ['name' => 'Client, 38 · Founder', 'quote' => 'The sleep alone was worth it. I didn\'t realise how broken my recovery was until everything else started improving. Energy, focus, patience — all of it came back.', 'result' => 'Testosterone +40% · Sleep score 92'],
                         ['name' => 'Client, 45 · Managing Director', 'quote' => 'Four hours a week. That\'s what he asked for. I gave him four hours and got back my entire week. The clarity, the energy, the edge — it\'s all there again.', 'result' => '4h/week · 12 months · still going'],
                     ],

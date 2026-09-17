@@ -112,12 +112,23 @@
                 </div>
                 <div v-if="parseMeta(s('social_proof'), 'testimonials').length" class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div v-for="(t, i) in parseMeta(s('social_proof'), 'testimonials')" :key="i" class="border border-gold-deep/20 p-6 relative">
-                        <span class="font-serif text-gold/20 text-6xl absolute top-3 left-4 leading-none">&ldquo;</span>
-                        <p class="text-text-body text-sm leading-relaxed relative z-10 mt-6">{{ t.quote }}</p>
-                        <div class="mt-6 pt-4 border-t border-gold-deep/10">
-                            <p class="text-off-white text-sm font-semibold">{{ t.name }}</p>
-                            <p v-if="t.result" class="text-gold text-xs mt-1">{{ t.result }}</p>
-                        </div>
+                        <template v-if="t.stats && t.stats.length">
+                            <p class="text-off-white text-sm font-semibold uppercase tracking-[0.25em]">{{ t.name }}</p>
+                            <p v-if="t.meta" class="text-warm-grey text-xs mt-2">{{ t.meta }}</p>
+                            <p v-if="t.commitment" class="text-warm-grey text-xs mt-0.5">{{ t.commitment }}</p>
+                            <div class="mt-6 pt-4 border-t border-gold-deep/10">
+                                <p class="font-display text-gold text-3xl tracking-[0.06em]">{{ t.stats[0] }}</p>
+                                <p v-for="(line, j) in t.stats.slice(1)" :key="j" class="text-text-body text-sm mt-2">{{ line }}</p>
+                            </div>
+                        </template>
+                        <template v-else>
+                            <span class="font-serif text-gold/20 text-6xl absolute top-3 left-4 leading-none">&ldquo;</span>
+                            <p class="text-text-body text-sm leading-relaxed relative z-10 mt-6">{{ t.quote }}</p>
+                            <div class="mt-6 pt-4 border-t border-gold-deep/10">
+                                <p class="text-off-white text-sm font-semibold">{{ t.name }}</p>
+                                <p v-if="t.result" class="text-gold text-xs mt-1">{{ t.result }}</p>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>

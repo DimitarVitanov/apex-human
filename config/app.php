@@ -101,6 +101,13 @@ return [
 
     'mk_countries' => ['MK'],
 
+    /*
+    | Enables the IP-based country lookup fallback in SetLocale for hosts that
+    | do not provide a CDN geo header (CF-IPCountry etc.). Must live here —
+    | env() is unavailable once config is cached in production.
+    */
+    'geoip_lookup' => env('APP_GEOIP_LOOKUP', false),
+
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
     /*
