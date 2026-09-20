@@ -57,8 +57,14 @@ class MacedonianTranslationSeeder extends Seeder
     private function seedSections(): void
     {
         foreach ($this->load('sections.mk.json') as $row) {
-            $section = Section::find($row['id'] ?? null);
+            // Sections are matched by page slug + section key — row ids drift
+            // between environments (re-seeds, admin edits), these don't.
+            $section = Section::whereHas('page', fn ($q) => $q->where('slug', $row['page'] ?? null))
+                ->where('key', $row['key'] ?? null)
+                ->first();
             if (! $section) {
+                $this->command?->warn("Section not found: {$row['page']}/{$row['key']}");
+
                 continue;
             }
 
@@ -75,7 +81,7 @@ class MacedonianTranslationSeeder extends Seeder
                 }
             }
 
-            $section->setTranslations('mk', $values)->save();
+            $this->replaceTranslations($section, $values);
         }
     }
 
@@ -88,13 +94,21 @@ class MacedonianTranslationSeeder extends Seeder
             $item?->setTranslations('mk', $this->only($row, ['headline', 'body', 'category']))->save();
         }
 
+        // Nav items are matched by location + current English label; pages by
+        // slug — both survive rows being recreated with fresh ids.
         foreach ($misc['nav'] ?? [] as $row) {
-            $item = NavigationItem::find($row['id'] ?? null);
-            $item?->setTranslations('mk', $this->only($row, ['label']))->save();
+            $item = NavigationItem::where('location', $row['location'] ?? null)
+                ->where('label', $row['match_label'] ?? null)
+                ->first();
+            if ($item) {
+                $this->replaceTranslations($item, $this->only($row, ['label']));
+            } else {
+                $this->command?->warn("Nav item not found: {$row['location']}/{$row['match_label']}");
+            }
         }
 
         foreach ($misc['pages'] ?? [] as $row) {
-            $item = Page::find($row['id'] ?? null);
+            $item = Page::where('slug', $row['slug'] ?? null)->first();
             $item?->setTranslations('mk', $this->only($row, ['title', 'meta_title', 'meta_description']))->save();
         }
 
@@ -102,6 +116,18 @@ class MacedonianTranslationSeeder extends Seeder
             $setting = SiteSetting::where('key', $key)->first();
             $setting?->setTranslations('mk', ['value' => $value])->save();
         }
+    }
+
+    /**
+     * Replace (not merge) the model's mk bucket with the given values, so
+     * stale fields from earlier runs never linger on the row.
+     */
+    private function replaceTranslations($model, array $values): void
+    {
+        $all = $model->translations ?? [];
+        unset($all['mk']);
+        $model->translations = $all;
+        $model->setTranslations('mk', $values)->save();
     }
 
     /** Decode a translations JSON file, returning an array (or empty on miss). */
