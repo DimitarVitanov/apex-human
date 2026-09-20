@@ -151,7 +151,7 @@
                     </Link>
                 </div>
                 <div class="relative">
-                    <img src="/images/morning-scene.webp" alt="Morning routine" class="w-full aspect-[4/3] object-cover">
+                    <img src="/images/morning-scene.webp" :alt="t('home.morning_alt', 'Morning routine')" class="w-full aspect-[4/3] object-cover">
                     <div class="absolute inset-0 border border-gold/10"></div>
                 </div>
             </div>
@@ -309,7 +309,7 @@ const props = defineProps({
     latestDailyApex: { type: Array, default: () => [] },
 });
 
-const { t } = useI18n();
+const { t, dateLocale } = useI18n();
 
 usePageAnimations();
 
@@ -354,6 +354,6 @@ function metaVal(section, key) {
 
 function formatDate(date) {
     if (!date) return '';
-    return new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    return new Date(date).toLocaleDateString(dateLocale('en-GB'), { day: 'numeric', month: 'short' });
 }
 </script>

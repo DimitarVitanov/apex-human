@@ -27,7 +27,7 @@
 
                     <!-- Day Headers -->
                     <div class="grid grid-cols-7 border border-gold-deep/20">
-                        <div v-for="day in ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']" :key="day" class="text-center text-gold text-[9px] uppercase tracking-[0.3em] font-semibold py-3 border-b border-gold-deep/20">
+                        <div v-for="day in dayHeaders" :key="day" class="text-center text-gold text-[9px] uppercase tracking-[0.3em] font-semibold py-3 border-b border-gold-deep/20">
                             {{ day }}
                         </div>
                     </div>
@@ -103,7 +103,7 @@ import { useI18n } from '@/Composables/useI18n';
 
 const props = defineProps({ token: String, applicantName: String });
 const $page = usePage();
-const { t } = useI18n();
+const { t, dateLocale } = useI18n();
 
 const slots = ref([]);
 const loading = ref(false);
@@ -116,8 +116,14 @@ const bookingForm = useForm({
     slot_id: null,
 });
 
+const dayHeaders = computed(() => [
+    t('calendar.mon', 'MON'), t('calendar.tue', 'TUE'), t('calendar.wed', 'WED'),
+    t('calendar.thu', 'THU'), t('calendar.fri', 'FRI'), t('calendar.sat', 'SAT'),
+    t('calendar.sun', 'SUN'),
+]);
+
 const monthLabel = computed(() => {
-    return currentMonth.value.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();
+    return currentMonth.value.toLocaleDateString(dateLocale(), { month: 'long', year: 'numeric' }).toUpperCase();
 });
 
 function changeMonth(delta) {
@@ -197,7 +203,7 @@ const selectedDateSlots = computed(() => {
 const formatSelectedDate = computed(() => {
     if (!selectedDate.value) return '';
     const d = new Date(selectedDate.value + 'T12:00:00');
-    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).toUpperCase();
+    return d.toLocaleDateString(dateLocale(), { weekday: 'long', month: 'long', day: 'numeric' }).toUpperCase();
 });
 
 function confirmBooking() {

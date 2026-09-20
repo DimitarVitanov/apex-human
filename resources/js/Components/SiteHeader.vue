@@ -36,7 +36,7 @@
 
             <button
                 class="lg:hidden relative w-11 h-11 flex items-center justify-center cursor-none"
-                aria-label="Toggle menu"
+                :aria-label="t('nav.toggle_menu', 'Toggle menu')"
                 @click="mobileOpen = !mobileOpen"
             >
                 <div class="flex flex-col gap-1.5">
@@ -96,7 +96,9 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { Link, usePage } from '@inertiajs/vue3';
 import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
+import { useI18n } from '@/Composables/useI18n';
 
+const { t } = useI18n();
 const page = usePage();
 const allItems = computed(() => page.props.navigation?.header || []);
 const navItems = computed(() => allItems.value.filter(i => !i.is_cta));

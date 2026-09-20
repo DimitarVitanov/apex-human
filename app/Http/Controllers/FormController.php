@@ -33,8 +33,9 @@ class FormController extends Controller
 
         $application = Application::create($data);
 
-        Mail::to($application->email)->send(new ApplicationConfirmation($application));
-        Mail::to(config('mail.from.address'))->send(new AdminNewApplication($application));
+        // Visitor confirmation follows the site language; admin mail stays English.
+        Mail::to($application->email)->locale(app()->getLocale())->send(new ApplicationConfirmation($application));
+        Mail::to(config('mail.from.address'))->locale('en')->send(new AdminNewApplication($application));
 
         return back()->with('success', true)->with('booking_token', $application->booking_token);
     }
@@ -49,9 +50,9 @@ class FormController extends Controller
 
         $contact = Contact::create($data);
 
-        Mail::to($contact->email)->send(new ContactAutoReply($contact));
-        Mail::to(config('mail.from.address'))->send(new AdminNewContact($contact));
+        Mail::to($contact->email)->locale(app()->getLocale())->send(new ContactAutoReply($contact));
+        Mail::to(config('mail.from.address'))->locale('en')->send(new AdminNewContact($contact));
 
-        return back()->with('success', "Message sent. We'll respond within 48 hours.");
+        return back()->with('success', __('contact.success_message'));
     }
 }

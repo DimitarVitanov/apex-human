@@ -17,7 +17,7 @@ class ApplicationConfirmation extends Mailable
     {
         $bookingUrl = url('/apply/book?token=' . $this->application->booking_token);
 
-        return $this->subject('Application Received — Apex Human')
+        return $this->subject(__('email.application.subject'))
             ->view('emails.application-confirmation', [
                 'application' => $this->application,
                 'bookingUrl' => $bookingUrl,

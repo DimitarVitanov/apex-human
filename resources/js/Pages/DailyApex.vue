@@ -29,7 +29,7 @@ import { useI18n } from '@/Composables/useI18n';
 
 const props = defineProps({ page: Object, sections: Object, posts: Object });
 
-const { t } = useI18n();
+const { t, dateLocale } = useI18n();
 
 usePageAnimations();
 
@@ -37,6 +37,6 @@ function s(key) { return props.sections?.[key] || null; }
 
 function formatDate(date) {
     if (!date) return '';
-    return new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    return new Date(date).toLocaleDateString(dateLocale('en-GB'), { day: 'numeric', month: 'short', year: 'numeric' });
 }
 </script>

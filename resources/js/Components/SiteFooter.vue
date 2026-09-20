@@ -12,7 +12,7 @@
                         <a
                             href="mailto:coach@apexhuman.co"
                             class="group flex items-center justify-center w-9 h-9 border border-gold-deep/30 hover:border-gold transition-colors duration-300 cursor-none"
-                            title="Email us"
+                            :title="t('footer.email_us', 'Email us')"
                         >
                             <svg class="w-4 h-4 text-text-body group-hover:text-gold-light transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
@@ -85,7 +85,7 @@
                     <Link href="/terms-of-service" class="hover:text-gold-light transition-colors duration-200">{{ t('footer.terms_of_service', 'Terms of Service') }}</Link>
                 </div>
                 <p class="text-warm-grey text-[10px] uppercase tracking-[0.2em]">
-                    &copy; {{ currentYear }} APEX HUMAN&#8482; &middot; ALL RIGHTS RESERVED &middot; apexhuman.co
+                    &copy; {{ currentYear }} APEX HUMAN&#8482; &middot; {{ t('footer.rights', 'All rights reserved') }} &middot; apexhuman.co
                 </p>
             </div>
         </div>

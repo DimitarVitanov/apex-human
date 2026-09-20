@@ -42,17 +42,17 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import { useI18n } from '@/Composables/useI18n';
 
 const props = defineProps({ booking: Object, application: Object });
-const { t } = useI18n();
+const { t, dateLocale } = useI18n();
 
 const formattedDate = computed(() => {
     if (!props.booking.date) return '';
     const d = new Date(props.booking.date + 'T12:00:00');
-    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    return d.toLocaleDateString(dateLocale(), { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
 });
 
 const dayName = computed(() => {
     if (!props.booking.date) return '';
     const d = new Date(props.booking.date + 'T12:00:00');
-    return d.toLocaleDateString('en-US', { weekday: 'long' });
+    return d.toLocaleDateString(dateLocale(), { weekday: 'long' });
 });
 </script>

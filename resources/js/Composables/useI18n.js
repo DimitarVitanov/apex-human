@@ -17,6 +17,15 @@ export function useI18n() {
     const dictionary = computed(() => page.props.translations || {});
 
     /**
+     * BCP-47 tag for Intl/Date formatting. Pass the English variant the page
+     * was designed with ('en-US' or 'en-GB'); non-English locales map to
+     * their own tag so month/weekday names follow the active language.
+     */
+    function dateLocale(englishVariant = 'en-US') {
+        return locale.value === 'en' ? englishVariant : locale.value;
+    }
+
+    /**
      * Translate a key. Falls back to the provided English default (or the key
      * itself) when the active locale has no entry — so English always renders
      * even before the dictionary is filled in.
@@ -33,5 +42,5 @@ export function useI18n() {
         window.location.href = `/lang/${next}`;
     }
 
-    return { t, locale, locales, setLocale };
+    return { t, locale, locales, setLocale, dateLocale };
 }

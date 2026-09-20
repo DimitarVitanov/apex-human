@@ -1,5 +1,5 @@
 <template>
-    <AppLayout title="Terms of Service — Apex Human">
+    <AppLayout :title="t('terms.title', 'Terms of Service') + ' — Apex Human'">
         <article class="pt-24 pb-14 md:pt-32 md:pb-24 px-6">
             <header class="max-w-3xl mx-auto text-center mb-12 md:mb-16">
                 <p class="text-gold text-[9px] uppercase tracking-[0.5em] font-sans font-semibold mb-6">{{ t('terms.eyebrow', 'Legal') }}</p>

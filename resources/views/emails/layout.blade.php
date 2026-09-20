@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -118,7 +118,7 @@
         </div>
 
         <div class="email-footer">
-            <p>&copy; {{ date('Y') }} Apex Human&#8482; &middot; All Rights Reserved</p>
+            <p>&copy; {{ date('Y') }} Apex Human&#8482; &middot; {{ __('email.footer_rights') }}</p>
             <p><a href="https://apexhuman.co">apexhuman.co</a></p>
         </div>
     </div>

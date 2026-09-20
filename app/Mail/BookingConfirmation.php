@@ -20,7 +20,7 @@ class BookingConfirmation extends Mailable
 
     public function build(): self
     {
-        return $this->subject('Call Booked — Apex Human')
+        return $this->subject(__('email.booking.subject'))
             ->view('emails.booking-confirmation', [
                 'booking' => $this->booking,
                 'application' => $this->application,

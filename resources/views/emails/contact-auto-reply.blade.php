@@ -1,22 +1,22 @@
-@extends('emails.layout', ['subject' => 'We Got Your Message — Apex Human'])
+@extends('emails.layout', ['subject' => __('email.contact.subject')])
 
 @section('content')
-    <h2>Thank you for reaching out.</h2>
+    <h2>{{ __('email.contact.heading') }}</h2>
 
     <p>{{ $contact->name }},</p>
 
-    <p>We've received your message and will get back to you as soon as possible.</p>
+    <p>{{ __('email.contact.received') }}</p>
 
     <div class="detail-box">
         <p>
-            <span class="detail-label">Your Message</span>
+            <span class="detail-label">{{ __('email.contact.your_message_label') }}</span>
             <span class="detail-value">{{ Str::limit($contact->message, 200) }}</span>
         </p>
     </div>
 
-    <p>In the meantime, if you're ready to start your transformation, you can apply directly:</p>
+    <p>{{ __('email.contact.meantime') }}</p>
 
-    <a href="https://apexhuman.co/apply" class="cta-button">Apply for Coaching &rarr;</a>
+    <a href="https://apexhuman.co/apply" class="cta-button">{{ __('email.contact.cta') }} &rarr;</a>
 
-    <p style="font-size: 13px; color: #8A8478; margin-top: 32px;">This is an automated confirmation. A real human will follow up shortly.</p>
+    <p style="font-size: 13px; color: #8A8478; margin-top: 32px;">{{ __('email.contact.automated') }}</p>
 @endsection

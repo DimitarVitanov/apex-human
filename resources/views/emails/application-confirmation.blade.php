@@ -1,22 +1,22 @@
-@extends('emails.layout', ['subject' => 'Application Received — Apex Human'])
+@extends('emails.layout', ['subject' => __('email.application.subject')])
 
 @section('content')
-    <h2>Your application has been received.</h2>
+    <h2>{{ __('email.application.heading') }}</h2>
 
     <p>{{ $application->full_name }},</p>
 
-    <p>Thank you for taking the first step. We've received your application and our team is reviewing it now.</p>
+    <p>{{ __('email.application.thanks') }}</p>
 
     <div class="detail-box">
         <p>
-            <span class="detail-label">Next Step</span>
-            <span class="detail-value">Book your free strategy call</span>
+            <span class="detail-label">{{ __('email.application.next_step_label') }}</span>
+            <span class="detail-value">{{ __('email.application.next_step_value') }}</span>
         </p>
     </div>
 
-    <p>This call is where we learn about your goals, assess your current state, and determine if the Apex system is the right fit for you.</p>
+    <p>{{ __('email.application.call_purpose') }}</p>
 
-    <a href="{{ $bookingUrl }}" class="cta-button">Book Your Call &rarr;</a>
+    <a href="{{ $bookingUrl }}" class="cta-button">{{ __('email.application.cta') }} &rarr;</a>
 
-    <p style="font-size: 13px; color: #8A8478; margin-top: 32px;">If you have any questions before your call, reply directly to this email.</p>
+    <p style="font-size: 13px; color: #8A8478; margin-top: 32px;">{{ __('email.application.questions') }}</p>
 @endsection

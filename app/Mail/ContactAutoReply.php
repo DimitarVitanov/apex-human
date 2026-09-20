@@ -15,7 +15,7 @@ class ContactAutoReply extends Mailable
 
     public function build(): self
     {
-        return $this->subject('We Got Your Message — Apex Human')
+        return $this->subject(__('email.contact.subject'))
             ->view('emails.contact-auto-reply', [
                 'contact' => $this->contact,
             ]);

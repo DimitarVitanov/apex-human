@@ -72,9 +72,9 @@ class BookingController extends Controller
 
         if ($application->booking) {
             if ($request->wantsJson()) {
-                return response()->json(['message' => 'You have already booked a call.'], 422);
+                return response()->json(['message' => __('booking.already_booked')], 422);
             }
-            return back()->with('error', 'You have already booked a call.');
+            return back()->with('error', __('booking.already_booked'));
         }
 
         $slot = AvailableSlot::where('id', $data['slot_id'])
@@ -83,9 +83,9 @@ class BookingController extends Controller
 
         if ($slot->isBooked()) {
             if ($request->wantsJson()) {
-                return response()->json(['message' => 'This slot has already been taken. Please choose another.'], 422);
+                return response()->json(['message' => __('booking.slot_taken')], 422);
             }
-            return back()->with('error', 'This slot has already been taken. Please choose another.');
+            return back()->with('error', __('booking.slot_taken'));
         }
 
         $booking = Booking::create([
@@ -96,8 +96,9 @@ class BookingController extends Controller
         ]);
 
         $meetLink = config('services.google.meet_link', 'https://meet.google.com');
-        Mail::to($application->email)->send(new BookingConfirmation($booking, $application, $meetLink));
-        Mail::to(config('mail.from.address'))->send(new BookingConfirmation($booking, $application, $meetLink));
+        // Visitor copy follows the site language; the admin copy stays English.
+        Mail::to($application->email)->locale(app()->getLocale())->send(new BookingConfirmation($booking, $application, $meetLink));
+        Mail::to(config('mail.from.address'))->locale('en')->send(new BookingConfirmation($booking, $application, $meetLink));
 
         if ($request->wantsJson()) {
             return response()->json(['success' => true, 'booking' => $booking]);
